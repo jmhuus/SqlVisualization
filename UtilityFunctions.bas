@@ -115,48 +115,48 @@ Public Function getNewShapeId(active_page As Page) As Integer
     ' Return last shape ID
     getNewShapeId = lastId
 End Function
-Public Function getNewShapeUid(active_page As Page) As String
-
-    ' Ensure active page has any shapes
-    If Not active_page.Shapes.Count > 0 Then
-        getNewShapeUid = ""
-        Exit Function
-    End If
-    
-    ' Iterate through all shapes
-    Dim s As Visio.Shape
-    Dim lastUid As String
-    For Each s In active_page.Shapes
-        lastUid = s.ID
-    Next s
-    
-    
-    ' Return last shape UID
-    getNewShapeId = lastUid
-End Function
-Public Function addMakeTable(ByRef active_page As Page, mt_name As String) As String
-    ' Ensure Basic Shapes stencil document exists
-    addStencil "basic_u.vss"
-    
-    
-    ' Retrieve Rounded Rectangle Master object
-    Dim roundedRec As Master
-    Set roundedRec = Application.Documents("Stencil6").Masters("Rounded Rectangle")
-    
-    
-    ' Drop the rounded rectangle onto the active page
-'    Dim newMakeTable As Shape
-    active_page.Drop roundedRec, 3.5, 3.5
-    
-    
-    ' Set make-table name
-'    newMakeTable.Name = mt_name
-    
-    
-    ' Return newly created make-table UID
-'    addMakeTable = newMakeTable.UniqueID(1)
-    
-End Function
+'Public Function getNewShapeUid(active_page As Page) As String
+'
+'    ' Ensure active page has any shapes
+'    If Not active_page.Shapes.Count > 0 Then
+'        getNewShapeUid = ""
+'        Exit Function
+'    End If
+'
+'    ' Iterate through all shapes
+'    Dim s As Visio.Shape
+'    Dim lastUid As String
+'    For Each s In active_page.Shapes
+'        lastUid = s.ID
+'    Next s
+'
+'
+'    ' Return last shape UID
+'    getNewShapeId = lastUid
+'End Function
+'Public Function addMakeTable(ByRef active_page As Page, mt_name As String) As String
+'    ' Ensure Basic Shapes stencil document exists
+'    addStencil "basic_u.vss"
+'
+'
+'    ' Retrieve Rounded Rectangle Master object
+'    Dim roundedRec As Master
+'    Set roundedRec = Application.Documents("Stencil6").Masters("Rounded Rectangle")
+'
+'
+'    ' Drop the rounded rectangle onto the active page
+''    Dim newMakeTable As Shape
+'    active_page.Drop roundedRec, 3.5, 3.5
+'
+'
+'    ' Set make-table name
+''    newMakeTable.Name = mt_name
+'
+'
+'    ' Return newly created make-table UID
+''    addMakeTable = newMakeTable.UniqueID(1)
+'
+'End Function
 Function addStencil(stencilName As String)
     
     

@@ -37,6 +37,21 @@ Public Sub constructor(active_page As Visio.Page, nTitle As String, nPosition As
     Set nodeShapeObj = pg.Shapes.ItemFromUniqueID(nodeUid)
     
     
+    ' Add color to node based on nodeType
+    Select Case nodeType
+        Case "Table"
+            nodeShapeObj.CellsU("Fillforegnd").FormulaU = "RGB(255, 255, 255)"
+        Case "SelectQuery"
+        Case "MakeTableQuery"
+            nodeShapeObj.CellsU("Fillforegnd").FormulaU = "RGB(193, 217, 255)"
+        Case "InsertIntoQuery"
+        Case "UpdateQuery"
+        Case "DeleteFrom"
+        Case "CreateTableQuery"
+    End Select
+    
+    
+    
     ' Relocate shape
     UtilityFunctions.setShapeCoordinates nodeShapeObj, nodePosition(0), nodePosition(1)
 End Sub
