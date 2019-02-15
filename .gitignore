@@ -1,2 +1,4 @@
 *.vsdm
 *.~vsdm
+*.idea
+out/

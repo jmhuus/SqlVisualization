@@ -26,10 +26,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class StatementDesignator implements StatementVisitor {
-    private ArrayList<DiagramNode> diagramNodes;
+    private DiagramNodeManager diagramNodeManager;
 
-    public StatementDesignator(ArrayList<DiagramNode> diagramNodes) {
-        this.diagramNodes = diagramNodes;
+    public StatementDesignator(DiagramNodeManager diagramNodeManager) {
+        this.diagramNodeManager = diagramNodeManager;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class StatementDesignator implements StatementVisitor {
 
         // Retrieve FROM tables, INTO tables, and SELECT items
         SelectBody selectBody = select.getSelectBody();
-        selectBody.accept(new SelectDesignator());
+        selectBody.accept(new SelectDesignator(diagramNodeManager));
     }
 
     @Override

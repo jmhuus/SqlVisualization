@@ -6,16 +6,16 @@ import net.sf.jsqlparser.statement.select.SetOperationList;
 import net.sf.jsqlparser.statement.select.WithItem;
 import net.sf.jsqlparser.statement.values.ValuesStatement;
 
-import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 
 public class SelectDesignator implements SelectVisitor {
 
-    private DiagramNode diagramNode;
+    private DiagramNodeManager diagramNodeManager;
 
-    public SelectDesignator(DiagramNode diagramNode) {
-        this.diagramNode = diagramNode;
+    public SelectDesignator(DiagramNodeManager diagramNodeManager) {
+        this.diagramNodeManager = diagramNodeManager;
     }
 
     @Override

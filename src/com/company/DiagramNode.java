@@ -43,7 +43,8 @@ public class DiagramNode {
         return childIds;
     }
 
-    public void addChildId(int childIds) {
-        this.childIds = childIds;
+    public void addChildId(int childId) {
+        childIds = new int[childIds.length];
+        childIds[childIds.length] = childId;
     }
 }
