@@ -1,4 +1,5 @@
 *.vsdm
 *.~vsdm
 *.idea
+.ida/
 out/

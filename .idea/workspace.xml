@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="360442cc-8cc1-450e-a9de-e412d9d51d6d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/company/DiagramNodeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestSql.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/DiagramNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/DiagramNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/SelectDesignator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/SelectDesignator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/StatementDesignator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/StatementDesignator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,12 +62,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DiagramNode.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DiagramNode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/DiagramNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+            <state relative-caret-position="550">
+              <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#381#382#0" expanded="true" />
                 <element signature="e#406#407#0" expanded="true" />
                 <element signature="e#439#440#0" expanded="true" />
@@ -82,18 +77,24 @@
                 <element signature="e#525#526#0" expanded="true" />
                 <element signature="e#565#566#0" expanded="true" />
                 <element signature="e#597#598#0" expanded="true" />
+                <element signature="e#767#768#0" expanded="true" />
+                <element signature="e#793#794#0" expanded="true" />
+                <element signature="e#780#781#0" expanded="true" />
+                <element signature="e#810#811#0" expanded="true" />
                 <element signature="e#632#633#0" expanded="true" />
                 <element signature="e#664#665#0" expanded="true" />
-                <element signature="e#713#714#0" expanded="true" />
-                <element signature="e#755#756#0" expanded="true" />
+                <element signature="e#1003#1004#0" expanded="true" />
+                <element signature="e#1034#1035#0" expanded="true" />
                 <element signature="e#789#790#0" expanded="true" />
                 <element signature="e#820#821#0" expanded="true" />
+                <element signature="e#1134#1135#0" expanded="true" />
+                <element signature="e#1157#1158#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DiagramNodeManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DiagramNodeManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/DiagramNodeManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="256">
@@ -139,8 +140,8 @@
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/StatementDesignator.java" />
         <option value="$PROJECT_DIR$/src/com/company/SelectDesignator.java" />
-        <option value="$PROJECT_DIR$/src/com/company/DiagramNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/DiagramNodeManager.java" />
+        <option value="$PROJECT_DIR$/src/com/company/DiagramNode.java" />
       </list>
     </option>
   </component>
@@ -303,6 +304,7 @@
         <state relative-caret-position="496">
           <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#381#382#0" expanded="true" />
             <element signature="e#406#407#0" expanded="true" />
             <element signature="e#439#440#0" expanded="true" />
@@ -311,12 +313,18 @@
             <element signature="e#525#526#0" expanded="true" />
             <element signature="e#565#566#0" expanded="true" />
             <element signature="e#597#598#0" expanded="true" />
+            <element signature="e#767#768#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#780#781#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
             <element signature="e#632#633#0" expanded="true" />
             <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#713#714#0" expanded="true" />
-            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1034#1035#0" expanded="true" />
             <element signature="e#789#790#0" expanded="true" />
             <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#1134#1135#0" expanded="true" />
+            <element signature="e#1157#1158#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -446,29 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DiagramNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
-          <folding>
-            <element signature="e#381#382#0" expanded="true" />
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#467#468#0" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-            <element signature="e#525#526#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#597#598#0" expanded="true" />
-            <element signature="e#632#633#0" expanded="true" />
-            <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#713#714#0" expanded="true" />
-            <element signature="e#755#756#0" expanded="true" />
-            <element signature="e#789#790#0" expanded="true" />
-            <element signature="e#820#821#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
@@ -490,6 +475,36 @@
             <element signature="e#317#318#0" expanded="true" />
             <element signature="e#768#769#0" expanded="true" />
             <element signature="e#808#809#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/DiagramNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#467#468#0" expanded="true" />
+            <element signature="e#498#499#0" expanded="true" />
+            <element signature="e#525#526#0" expanded="true" />
+            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#597#598#0" expanded="true" />
+            <element signature="e#767#768#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#780#781#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#664#665#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1034#1035#0" expanded="true" />
+            <element signature="e#789#790#0" expanded="true" />
+            <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#1134#1135#0" expanded="true" />
+            <element signature="e#1157#1158#0" expanded="true" />
           </folding>
         </state>
       </provider>

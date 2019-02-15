@@ -1,18 +1,23 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DiagramNode {
 
     private int id;
     private String name;
-    private int[] parentIds;
-    private int[] childIds;
+    private String nodeType;
+    private List<Integer> parentIds;
+    private List<Integer> childIds;
 
 
-    public DiagramNode(int id, String name, int[] parentIds, int[] childIds) {
+    public DiagramNode(int id, String name, String nodeType) {
         this.id = id;
         this.name = name;
-        this.parentIds = parentIds;
-        this.childIds = childIds;
+        this.nodeType = nodeType;
+        this.parentIds = new ArrayList<>();
+        this.childIds = new ArrayList<>();
     }
 
     public int getId() {
@@ -31,20 +36,27 @@ public class DiagramNode {
         this.name = name;
     }
 
-    public int[] getParentIds() {
+    public String getNodeType(){
+        return this.nodeType;
+    }
+
+    public void setNodeType(String nodeType){
+        this.nodeType = nodeType;
+    }
+
+    public List<Integer> getParentIds() {
         return parentIds;
     }
 
-    public void setParentIds(int[] parentIds) {
-        this.parentIds = parentIds;
+    public void addParent(int parentId){
+        parentIds.add(parentId);
     }
 
-    public int[] getChildIds() {
+    public List<Integer> getChildIds() {
         return childIds;
     }
 
     public void addChildId(int childId) {
-        childIds = new int[childIds.length];
-        childIds[childIds.length] = childId;
+        childIds.add(childId);
     }
 }
