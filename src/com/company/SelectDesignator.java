@@ -12,18 +12,18 @@ import java.util.List;
 
 public class SelectDesignator implements SelectVisitor {
 
-    private DiagramNodeManager diagramNodeManager;
+//    private DiagramNodeManager diagramNodeManager;
 
-    public SelectDesignator(DiagramNodeManager diagramNodeManager) {
-        this.diagramNodeManager = diagramNodeManager;
-    }
+//    public SelectDesignator() {
+//        this.diagramNodeManager = diagramNodeManager;
+//    }
 
     @Override
     public void visit(PlainSelect plainSelect) {
         // Child nodes
         List selectItems = plainSelect.getIntoTables();
         for (Iterator iter = selectItems.iterator(); iter.hasNext();){
-
+            System.out.println(iter.next());
         }
     }
 
