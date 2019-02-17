@@ -24,20 +24,18 @@ public class SelectDesignator implements SelectVisitor {
     @Override
     public void visit(PlainSelect plainSelect) {
         // Child nodes (INTO tables)
-        List selectItems = plainSelect.getIntoTables();
-        String intoTableName;
+        List<Table> selectItems = plainSelect.getIntoTables();
         DiagramNode tmpNode;
-        for (Iterator iter = selectItems.iterator(); iter.hasNext();){
+        for (Table intoTable: selectItems){
 
             // Node doesn't exist; init before adding child object
-            intoTableName = ((Table) iter.next()).getName();
-            if(! diagramNodeManager.nodeExists(intoTableName)){
+            if(! diagramNodeManager.nodeExists(intoTable.getName())){
                 tmpNode = new DiagramNode();
                 tmpNode.setNodeType("TABLE");
-                tmpNode.setNodeName(intoTableName);
+                tmpNode.setNodeName(intoTable.getName());
                 diagramNodeManager.addDiagramNode(tmpNode);
             }else{
-                tmpNode = diagramNodeManager.getDiagramNode(intoTableName);
+                tmpNode = diagramNodeManager.getDiagramNode(intoTable.getName());
             }
 
             // Add child object

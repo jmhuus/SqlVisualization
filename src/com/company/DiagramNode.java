@@ -32,7 +32,7 @@ public class DiagramNode {
         this.nodeType = nodeType;
     }
 
-    public List<DiagramNode> getParentNodeNames() {
+    public List<DiagramNode> getParentNodes() {
         return parentNodes;
     }
 

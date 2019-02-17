@@ -138,14 +138,12 @@ public class StatementDesignator implements StatementVisitor {
 
         // Set parent (FROM tables) nodes
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
-        List tableList = tablesNamesFinder.getTableList(select);
-        String fromTableName;
+        List<String> tableList = tablesNamesFinder.getTableList(select);
         DiagramNode tmpNode;
-        for (Iterator iter = tableList.iterator(); iter.hasNext(); ) {
+        for (String fromTableName: tableList) {
 
             // Node doesn't exist, init before adding parent object
-            fromTableName = (String) iter.next();
-            if (! diagramNodeManager.nodeExists((String) iter.next())){
+            if (! diagramNodeManager.nodeExists(fromTableName)){
                 tmpNode = new DiagramNode();
                 tmpNode.setNodeType("TABLE");
                 tmpNode.setNodeName(fromTableName);

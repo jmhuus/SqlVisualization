@@ -29,6 +29,13 @@ public class Main {
             Statement statement = pm.parse(new StringReader(sql));
             statement.accept(new StatementDesignator(diagramNode, diagramNodeManager));
 
+            // Testing that diagramNode has available parent and child nodes
+            for(DiagramNode child: diagramNode.getChildNodes()){
+                System.out.println(child.getNodeName() + " " + child.getNodeType());
+            }
+            for(DiagramNode parent: diagramNode.getParentNodes()){
+                System.out.println(parent.getNodeName() + " " + parent.getNodeType());
+            }
 
         }catch (Exception e){
             e.printStackTrace();
