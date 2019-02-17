@@ -1,5 +1,6 @@
 package com.company;
 
+import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.SelectVisitor;
 import net.sf.jsqlparser.statement.select.SetOperationList;
@@ -13,17 +14,34 @@ import java.util.List;
 public class SelectDesignator implements SelectVisitor {
 
     private DiagramNode diagramNode;
+    private DiagramNodeManager diagramNodeManager;
 
-    public SelectDesignator(DiagramNode diagramNode) {
+    public SelectDesignator(DiagramNode diagramNode, DiagramNodeManager diagramNodeManager) {
         this.diagramNode = diagramNode;
+        this.diagramNodeManager = diagramNodeManager;
     }
 
     @Override
     public void visit(PlainSelect plainSelect) {
-        // Child nodes
+        // Child nodes (INTO tables)
         List selectItems = plainSelect.getIntoTables();
+        String intoTableName;
+        DiagramNode tmpNode;
         for (Iterator iter = selectItems.iterator(); iter.hasNext();){
-            System.out.println(iter.next());
+
+            // Node doesn't exist; init before adding child object
+            intoTableName = ((Table) iter.next()).getName();
+            if(! diagramNodeManager.nodeExists(intoTableName)){
+                tmpNode = new DiagramNode();
+                tmpNode.setNodeType("TABLE");
+                tmpNode.setNodeName(intoTableName);
+                diagramNodeManager.addDiagramNode(tmpNode);
+            }else{
+                tmpNode = diagramNodeManager.getDiagramNode(intoTableName);
+            }
+
+            // Add child object
+            diagramNode.addChildNode(tmpNode);
         }
     }
 

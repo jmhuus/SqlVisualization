@@ -1,5 +1,7 @@
 package com.company;
 
+import javafx.scene.control.Tab;
+import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.*;
 import net.sf.jsqlparser.statement.alter.Alter;
 import net.sf.jsqlparser.statement.comment.Comment;
@@ -129,19 +131,38 @@ public class StatementDesignator implements StatementVisitor {
         diagramNode.setNodeType("SELECT");
 
         // Node name
-        diagramNode.setNodeName(DiagramNodeManager.getNewDiagramNodeQueryName());
+        diagramNode.setNodeName(diagramNodeManager.getNewDiagramNodeQueryName("SELECT"));
 
-        // Set child (FROM tables) nodes
+        // Add new diagramNode to DiagramNodeManager
+        diagramNodeManager.addDiagramNode(diagramNode);
+
+        // Set parent (FROM tables) nodes
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
         List tableList = tablesNamesFinder.getTableList(select);
+        String fromTableName;
+        DiagramNode tmpNode;
         for (Iterator iter = tableList.iterator(); iter.hasNext(); ) {
-            ;
+
+            // Node doesn't exist, init before adding parent object
+            fromTableName = (String) iter.next();
+            if (! diagramNodeManager.nodeExists((String) iter.next())){
+                tmpNode = new DiagramNode();
+                tmpNode.setNodeType("TABLE");
+                tmpNode.setNodeName(fromTableName);
+                diagramNodeManager.addDiagramNode(tmpNode);
+            }else{
+                tmpNode = diagramNodeManager.getDiagramNode(fromTableName);
+            }
+
+
+            // Add parent object
+            diagramNode.addParent(tmpNode);
         }
 
 
         // Retrieve FROM tables, INTO tables, and SELECT items
         SelectBody selectBody = select.getSelectBody();
-        selectBody.accept(new SelectDesignator(diagramNode));
+        selectBody.accept(new SelectDesignator(diagramNode, diagramNodeManager));
     }
 
     @Override
