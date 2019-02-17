@@ -5,58 +5,46 @@ import java.util.List;
 
 public class DiagramNode {
 
-    private int id;
-    private String name;
+    private String nodeName;
     private String nodeType;
-    private List<Integer> parentIds;
-    private List<Integer> childIds;
+    private List<DiagramNode> parentNodes;
+    private List<DiagramNode> childNodes;
 
 
-    public DiagramNode(int id, String name, String nodeType) {
-        this.id = id;
-        this.name = name;
-        this.nodeType = nodeType;
-        this.parentIds = new ArrayList<>();
-        this.childIds = new ArrayList<>();
+    public DiagramNode() {
+        this.parentNodes = new ArrayList<>();
+        this.childNodes = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
+    public void setNodeName(String nodeName) {
+        this.nodeName = nodeName;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getNodeName() {
+        return nodeName;
     }
 
     public String getNodeType(){
         return this.nodeType;
     }
 
-    public void setNodeType(String nodeType){
+    public void setNodeType(String nodeType) {
         this.nodeType = nodeType;
     }
 
-    public List<Integer> getParentIds() {
-        return parentIds;
+    public List<DiagramNode> getParentNodeNames() {
+        return parentNodes;
     }
 
-    public void addParent(int parentId){
-        parentIds.add(parentId);
+    public void addParent(DiagramNode parentNode){
+        parentNodes.add(parentNode);
     }
 
-    public List<Integer> getChildIds() {
-        return childIds;
+    public List<DiagramNode> getChildNodes() {
+        return childNodes;
     }
 
-    public void addChildId(int childId) {
-        childIds.add(childId);
+    public void addChildNode(DiagramNode childNodeName) {
+        childNodes.add(childNodeName);
     }
 }

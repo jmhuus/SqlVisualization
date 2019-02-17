@@ -21,14 +21,15 @@ import net.sf.jsqlparser.statement.upsert.Upsert;
 import net.sf.jsqlparser.statement.values.ValuesStatement;
 import net.sf.jsqlparser.util.TablesNamesFinder;
 
-
 import java.util.Iterator;
 import java.util.List;
 
 public class StatementDesignator implements StatementVisitor {
+    private DiagramNode diagramNode;
     private DiagramNodeManager diagramNodeManager;
 
-    public StatementDesignator(DiagramNodeManager diagramNodeManager) {
+    public StatementDesignator(DiagramNode diagramNode, DiagramNodeManager diagramNodeManager) {
+        this.diagramNode = diagramNode;
         this.diagramNodeManager = diagramNodeManager;
     }
 
@@ -124,16 +125,23 @@ public class StatementDesignator implements StatementVisitor {
 
     @Override
     public void visit(Select select) {
+        // Node type
+        diagramNode.setNodeType("SELECT");
+
+        // Node name
+        diagramNode.setNodeName(DiagramNodeManager.getNewDiagramNodeQueryName());
+
+        // Set child (FROM tables) nodes
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
         List tableList = tablesNamesFinder.getTableList(select);
         for (Iterator iter = tableList.iterator(); iter.hasNext(); ) {
-            System.out.println(iter.next());
+            ;
         }
 
 
         // Retrieve FROM tables, INTO tables, and SELECT items
         SelectBody selectBody = select.getSelectBody();
-        selectBody.accept(new SelectDesignator(diagramNodeManager));
+        selectBody.accept(new SelectDesignator(diagramNode));
     }
 
     @Override

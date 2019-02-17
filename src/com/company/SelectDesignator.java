@@ -12,10 +12,10 @@ import java.util.List;
 
 public class SelectDesignator implements SelectVisitor {
 
-    private DiagramNodeManager diagramNodeManager;
+    private DiagramNode diagramNode;
 
-    public SelectDesignator(DiagramNodeManager diagramNodeManager) {
-        this.diagramNodeManager = diagramNodeManager;
+    public SelectDesignator(DiagramNode diagramNode) {
+        this.diagramNode = diagramNode;
     }
 
     @Override
