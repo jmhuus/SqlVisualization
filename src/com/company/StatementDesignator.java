@@ -23,7 +23,6 @@ import net.sf.jsqlparser.statement.upsert.Upsert;
 import net.sf.jsqlparser.statement.values.ValuesStatement;
 import net.sf.jsqlparser.util.TablesNamesFinder;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class StatementDesignator implements StatementVisitor {

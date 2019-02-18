@@ -7,8 +7,6 @@ import net.sf.jsqlparser.statement.select.SetOperationList;
 import net.sf.jsqlparser.statement.select.WithItem;
 import net.sf.jsqlparser.statement.values.ValuesStatement;
 
-
-import java.util.Iterator;
 import java.util.List;
 
 public class SelectDesignator implements SelectVisitor {

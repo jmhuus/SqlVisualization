@@ -10,18 +10,15 @@ public class Main {
     public static void main(String[] args) {
         try {
 
-
+            // All nodes tracked within DiagramNodeManager
             DiagramNodeManager diagramNodeManager = new DiagramNodeManager();
+            DiagramNode diagramNode = new DiagramNode();
 
 
             /** TODO: use keyword SQL starting statements to recognize new queries
              * ALTER, COMMENT, CREATE, DELETE, DROP, EXECUTE, INSERT, MERGE
              * REPLACE, SELECT, TRUNCATE, UPDATE, UPSERT, VALUES
              */
-
-
-            // All nodes tracked within DiagramNodeManager
-            DiagramNode diagramNode = new DiagramNode();
 
             // Parse and return select statement items
             CCJSqlParserManager pm = new CCJSqlParserManager();

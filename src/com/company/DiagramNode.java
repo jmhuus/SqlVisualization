@@ -3,6 +3,11 @@ package com.company;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * DiagramNode represents a single node in the diagram - Queries, temporary tables, server tables, sub-queries, etc.
+ * References to child(INTO) and parent(FROM) node objects are available - although stored with scope in DiagramNodeManager,
+ */
 public class DiagramNode {
 
     private String nodeName;
