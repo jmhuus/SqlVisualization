@@ -1,8 +1,5 @@
 package com.company;
 
-import net.sf.jsqlparser.parser.CCJSqlParserManager;
-import net.sf.jsqlparser.statement.Statement;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +39,9 @@ public class Main {
             StringBuilder stringBuilder = new StringBuilder();
             List<String> statements = new ArrayList<>();
             boolean statementFound = false;
-            for (int i = 0; i < lines.size(); i++) {
+            for (String line: lines) {
                 // Append each query line
-                if (lines.get(i).contains("SELECT")) {
+                if (line.contains("SELECT")) {
 
                     // Add query node to diagram
                     if(statementFound){
@@ -59,7 +56,7 @@ public class Main {
                 }
 
                 // Begin building statement SQL string
-                stringBuilder.append(lines.get(i) + " \n");
+                stringBuilder.append(line + " \n");
             }
             statements.add(stringBuilder.toString());
 

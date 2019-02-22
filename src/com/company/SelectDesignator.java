@@ -14,7 +14,7 @@ public class SelectDesignator implements SelectVisitor {
     private DiagramNode diagramNode;
     private DiagramNodeManager diagramNodeManager;
 
-    public SelectDesignator(DiagramNode diagramNode, DiagramNodeManager diagramNodeManager) {
+    SelectDesignator(DiagramNode diagramNode, DiagramNodeManager diagramNodeManager) {
         this.diagramNode = diagramNode;
         this.diagramNodeManager = diagramNodeManager;
     }

@@ -5,13 +5,13 @@ import net.sf.jsqlparser.statement.Statement;
 
 import java.io.StringReader;
 import java.util.HashMap;
-import java.util.List;
 
-public class DiagramNodeManager {
+
+class DiagramNodeManager {
 
     private HashMap<String, DiagramNode> diagramNodes;
 
-    public DiagramNodeManager() {
+    DiagramNodeManager() {
         diagramNodes = new HashMap<>();
     }
 
@@ -20,7 +20,7 @@ public class DiagramNodeManager {
      * Adds node objects to DiagramNodeManager
      * @param queryString multi-line SQL query string - recognized by SQL commands (SELECT, DELETE, etc.)
      */
-    public void addDiagramNode(String queryString){
+    void addDiagramNode(String queryString){
         DiagramNode diagramNode = new DiagramNode();
         try {
             // Parse and return select statement items
@@ -38,7 +38,7 @@ public class DiagramNodeManager {
      * @param diagramNode new node to be added to the diagram
      * @throws Exception node with provided name already exists
      */
-    public void addDiagramNode(DiagramNode diagramNode) {
+    void addDiagramNode(DiagramNode diagramNode) {
 
         // Store new DiagramNode
         diagramNodes.put(diagramNode.getNodeName(), diagramNode);
@@ -50,7 +50,7 @@ public class DiagramNodeManager {
      * @param nodeName
      * @return Diagram node object
      */
-    public DiagramNode getDiagramNode(String nodeName){
+    DiagramNode getDiagramNode(String nodeName){
         return diagramNodes.get(nodeName);
     }
 
@@ -60,7 +60,7 @@ public class DiagramNodeManager {
      * @param nodeName name of the node - used as the unique identifier
      * @return true if the node has already been instantiated
      */
-    public boolean nodeExists(String nodeName){
+    boolean nodeExists(String nodeName){
         return diagramNodes.containsKey(nodeName);
     }
 
@@ -69,7 +69,7 @@ public class DiagramNodeManager {
      * When instantiating a new query node, use this method in order to build it's unique name ID
      * @return unique query node name
      */
-    public String getNewDiagramNodeQueryName(String nodeType){
+    String getNewDiagramNodeQueryName(String nodeType){
         // Find next available node name
         int i=0;
         String newQueryName;
@@ -87,8 +87,10 @@ public class DiagramNodeManager {
         return newQueryName;
     }
 
-
-    public HashMap<String, DiagramNode> getDiagramNodes(){
+    /**
+     * @return all diagram nodes
+     */
+    HashMap<String, DiagramNode> getDiagramNodes(){
         return diagramNodes;
     }
 }

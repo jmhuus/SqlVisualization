@@ -16,16 +16,16 @@ public class DiagramNode {
     private List<DiagramNode> childNodes;
 
 
-    public DiagramNode() {
+    DiagramNode() {
         this.parentNodes = new ArrayList<>();
         this.childNodes = new ArrayList<>();
     }
 
-    public void setNodeName(String nodeName) {
+    void setNodeName(String nodeName) {
         this.nodeName = nodeName;
     }
 
-    public String getNodeName() {
+    String getNodeName() {
         return nodeName;
     }
 
@@ -33,23 +33,23 @@ public class DiagramNode {
         return this.nodeType;
     }
 
-    public void setNodeType(String nodeType) {
+    void setNodeType(String nodeType) {
         this.nodeType = nodeType;
     }
 
-    public List<DiagramNode> getParentNodes() {
+    List<DiagramNode> getParentNodes() {
         return parentNodes;
     }
 
-    public void addParent(DiagramNode parentNode){
+    void addParent(DiagramNode parentNode){
         parentNodes.add(parentNode);
     }
 
-    public List<DiagramNode> getChildNodes() {
+    List<DiagramNode> getChildNodes() {
         return childNodes;
     }
 
-    public void addChildNode(DiagramNode childNodeName) {
+    void addChildNode(DiagramNode childNodeName) {
         childNodes.add(childNodeName);
     }
 }

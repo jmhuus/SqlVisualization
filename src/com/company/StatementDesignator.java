@@ -1,7 +1,5 @@
 package com.company;
 
-import javafx.scene.control.Tab;
-import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.*;
 import net.sf.jsqlparser.statement.alter.Alter;
 import net.sf.jsqlparser.statement.comment.Comment;
@@ -29,7 +27,7 @@ public class StatementDesignator implements StatementVisitor {
     private DiagramNode diagramNode;
     private DiagramNodeManager diagramNodeManager;
 
-    public StatementDesignator(DiagramNode diagramNode, DiagramNodeManager diagramNodeManager) {
+    StatementDesignator(DiagramNode diagramNode, DiagramNodeManager diagramNodeManager) {
         this.diagramNode = diagramNode;
         this.diagramNodeManager = diagramNodeManager;
     }
