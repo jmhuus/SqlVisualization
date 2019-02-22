@@ -5,6 +5,7 @@ import net.sf.jsqlparser.statement.Statement;
 
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.List;
 
 public class DiagramNodeManager {
 
@@ -24,8 +25,7 @@ public class DiagramNodeManager {
         try {
             // Parse and return select statement items
             CCJSqlParserManager pm = new CCJSqlParserManager();
-            String sql = "SELECT T1.Id, T1.Name, T1.Address INTO ##JhTemp FROM Table1 AS T1 JOIN Table2 AS T2 ON T1.Id = T2.Id";
-            Statement statement = pm.parse(new StringReader(sql));
+            Statement statement = pm.parse(new StringReader(queryString));
             statement.accept(new StatementDesignator(diagramNode, this));
         } catch (Exception e){
             e.printStackTrace();
@@ -85,6 +85,11 @@ public class DiagramNodeManager {
         }
 
         return newQueryName;
+    }
+
+
+    public HashMap<String, DiagramNode> getDiagramNodes(){
+        return diagramNodes;
     }
 }
 

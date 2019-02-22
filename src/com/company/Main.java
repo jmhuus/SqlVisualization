@@ -40,21 +40,46 @@ public class Main {
             File file = new File("./TestSqlScript.sql");
             List<String> lines = FileUtils.readLines(file, "UTF-8");
             StringBuilder stringBuilder = new StringBuilder();
+            List<String> statements = new ArrayList<>();
+            boolean statementFound = false;
             for (int i = 0; i < lines.size(); i++) {
                 // Append each query line
                 if (lines.get(i).contains("SELECT")) {
 
                     // Add query node to diagram
-                    if (stringBuilder.toString() != "") {
-                        System.out.println(stringBuilder.toString());
-                        diagramNodeManager.addDiagramNode(stringBuilder.toString());
+                    if(statementFound){
+                        statements.add(stringBuilder.toString());
                     }
 
+                    // First statement found; don't attempt parsing none-statement strings
+                    statementFound = true;
+
+                    // New SQL statement string
                     stringBuilder = new StringBuilder();
                 }
 
+                // Begin building statement SQL string
+                stringBuilder.append(lines.get(i) + " \n");
+            }
+            statements.add(stringBuilder.toString());
 
-                stringBuilder.append(lines.get(i));
+            // TEST: statements are being grouped correctly
+            for(String statement: statements){
+                System.out.println(statement);
+                diagramNodeManager.addDiagramNode(statement);
+            }
+
+            // TEST: nodes initialized correctly
+            for(String diagramNodeName: diagramNodeManager.getDiagramNodes().keySet()){
+                System.out.println("\n\nnode name: "+diagramNodeName);
+                System.out.println("parent nodes:");
+                for(DiagramNode diagramNode: diagramNodeManager.getDiagramNode(diagramNodeName).getParentNodes()){
+                    System.out.println("    "+diagramNode.getNodeName());
+                }
+                System.out.println("\nchild nodes:");
+                for(DiagramNode diagramNode: diagramNodeManager.getDiagramNode(diagramNodeName).getChildNodes()){
+                    System.out.println("    "+diagramNode.getNodeName());
+                }
             }
         } catch (IOException ioe){
             ioe.printStackTrace();
