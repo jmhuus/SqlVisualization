@@ -1,4 +1,4 @@
 *.vsdm
 *.~vsdm
-.ida/
+workspace.xml
 out/
