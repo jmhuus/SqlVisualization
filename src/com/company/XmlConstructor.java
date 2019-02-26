@@ -71,7 +71,6 @@ public class XmlConstructor {
 
         // Add child nodes
         Element tmpElement;
-        System.out.println(diagramNode.getNodeName() + " " + diagramNode.getChildNodes().size());
         for (DiagramNode child : diagramNode.getChildNodes()) {
             tmpElement = xmlDocument.createElement(CHILD_NODES_ELEMENT_NAME);
             tmpElement.setAttribute(QUERY_NODE_TITLE_ATTRIBUTE, child.getNodeName());

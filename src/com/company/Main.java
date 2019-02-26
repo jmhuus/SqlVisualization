@@ -70,7 +70,7 @@ public class Main {
 
             // TEST: nodes initialized correctly
             for(String diagramNodeName: diagramNodeManager.getDiagramNodes().keySet()){
-                System.out.println("\n\nnode name: "+diagramNodeName);
+                System.out.println("\n\n========== "+diagramNodeName+" ==========");
                 System.out.println("parent nodes:");
                 for(DiagramNode diagramNode: diagramNodeManager.getDiagramNode(diagramNodeName).getParentNodes()){
                     System.out.println("    "+diagramNode.getNodeName());
@@ -88,6 +88,8 @@ public class Main {
         // Retrieve XML
         XmlConstructor xmlConstructor = new XmlConstructor(diagramNodeManager);
         Document xmlDocument = xmlConstructor.getXmlDiagram();
+        System.out.println();
+        System.out.println("========== XML ==========");
         System.out.println(XmlConstructor.getStringFromDocument(xmlDocument));
 
     }
