@@ -31,9 +31,11 @@ public class SelectDesignator implements SelectVisitor {
                 tmpNode = new DiagramNode();
                 tmpNode.setNodeType("TABLE");
                 tmpNode.setNodeName(intoTable.getName());
+                tmpNode.addParent(diagramNode);
                 diagramNodeManager.addDiagramNode(tmpNode);
             }else{
                 tmpNode = diagramNodeManager.getDiagramNode(intoTable.getName());
+                tmpNode.addParent(diagramNode);
             }
 
             // Add child object
