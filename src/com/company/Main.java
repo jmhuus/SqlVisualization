@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class Main {
 
@@ -80,6 +86,35 @@ public class Main {
             }
         } catch (IOException ioe){
             ioe.printStackTrace();
+        }
+
+
+        // Find root node; node with no parent nodes
+        // TODO: find a better way to begin XML construction recursion
+        String rootNodeName = null;
+        for(String nodeName: diagramNodeManager.getDiagramNodes().keySet()){
+            if(diagramNodeManager.getDiagramNodes().get(nodeName).getParentNodes().size()==0){
+                rootNodeName = nodeName;
+            }
+        }
+
+
+        try {
+            // Construct XML to represent diagram nodes
+            // Recursion to build XML tree
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+
+            // Root node to XML
+            DiagramNode root = diagramNodeManager.getDiagramNodes().get(rootNodeName);
+            Element rootElement = document.createElement(root.getNodeName());
+
+
+            for (DiagramNode node : root.getChildNodes()) {
+                // Parent nodes
+            }
+        }catch(ParserConfigurationException pce){
+            pce.printStackTrace();
         }
     }
 }
