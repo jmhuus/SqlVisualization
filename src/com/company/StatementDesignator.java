@@ -148,6 +148,7 @@ public class StatementDesignator implements StatementVisitor {
                 diagramNodeManager.addDiagramNode(tmpNode);
             }else{
                 tmpNode = diagramNodeManager.getDiagramNode(fromTableName);
+                tmpNode.addChildNode(diagramNode);
             }
 
 
