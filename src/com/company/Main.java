@@ -88,7 +88,7 @@ public class Main {
         // Retrieve XML
         XmlConstructor xmlConstructor = new XmlConstructor(diagramNodeManager);
         Document xmlDocument = xmlConstructor.getXmlDiagram();
-        System.out.println(xmlDocument.toString());
+        System.out.println(XmlConstructor.getStringFromDocument(xmlDocument));
 
     }
 }
