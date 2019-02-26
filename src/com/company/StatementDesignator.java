@@ -144,6 +144,7 @@ public class StatementDesignator implements StatementVisitor {
                 tmpNode = new DiagramNode();
                 tmpNode.setNodeType("TABLE");
                 tmpNode.setNodeName(fromTableName);
+                tmpNode.addChildNode(diagramNode);
                 diagramNodeManager.addDiagramNode(tmpNode);
             }else{
                 tmpNode = diagramNodeManager.getDiagramNode(fromTableName);
@@ -155,7 +156,7 @@ public class StatementDesignator implements StatementVisitor {
         }
 
 
-        // Retrieve FROM tables, INTO tables, and SELECT items
+        // Retrieve INTO tables
         SelectBody selectBody = select.getSelectBody();
         selectBody.accept(new SelectDesignator(diagramNode, diagramNodeManager));
     }
