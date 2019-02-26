@@ -11,7 +11,7 @@ public class XmlConstructor {
 
 
     private DiagramNodeManager diagramNodeManager;
-    private Document xmlDocument;
+
 
     public XmlConstructor(DiagramNodeManager diagramNodeManager) {
         this.diagramNodeManager = diagramNodeManager;
@@ -22,52 +22,46 @@ public class XmlConstructor {
      * Diagram nodes are nested under each parent node.
      * @return XML Document object containing the XML string.
      */
-    public Document getXmlDiagram(DiagramNodeManager diagramNodeManager){
+    public Document getXmlDiagram(){
 
         // Retrieve random start node - preferably one with no parent nodes
-        String rootNodeName = null;
-        for(String nodeName: diagramNodeManager.getDiagramNodes().keySet()){
-            if(diagramNodeManager.getDiagramNodes().get(nodeName).getParentNodes().size()==0){
-                rootNodeName = nodeName;
-            }
-        }
+        String rootNodeName = "SELECT0";
 
         // Construct XML to represent diagram nodes
-        DocumentBuilder documentBuilder=null;
-        Document document=null;
+        DocumentBuilder documentBuilder;
+        Document xmlDocument=null;
         try {
             documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            document = documentBuilder.newDocument();
+            xmlDocument = documentBuilder.newDocument();
 
-            // Connect children nodes
-            DiagramNode root = diagramNodeManager.getDiagramNodes().get(rootNodeName);
-            Element rootElement = document.createElement(root.getNodeName());
-            Element tmpElement;
-            for (DiagramNode node : root.getChildNodes()) {
-                tmpElement = document.createElement(node.getNodeName());
-            }
-
-            // Connect parent nodes
-            for (DiagramNode node : root.getParentNodes()) {
-
-            }
-        }catch(
-                ParserConfigurationException pce){
+            // Begin adding nodes to XML document; recursion.
+            DiagramNode rootNode = diagramNodeManager.getDiagramNodes().get(rootNodeName);
+            Element rootElement = xmlDocument.createElement(rootNode.getNodeName());
+            xmlDocument.appendChild(rootElement);
+            addChildrenNodes(rootNode, rootElement, xmlDocument);
+        } catch (ParserConfigurationException pce){
             pce.printStackTrace();
         }
 
-        return document;
+        return xmlDocument;
     }
 
 
     /**
      * Recursion method. Adds all children nodes to the XML Document.
-     * @param diagramNode
-     * @param parentElement
+     * @param diagramNode current node in the tree
+     * @param parentElement parent XML element object that children nodes will nest into
      */
-    void addNode(DiagramNode diagramNode, Element parentElement){
+    void addChildrenNodes(DiagramNode diagramNode, Element parentElement, Document xmlDocument){
 
-
+        // Add child nodes
+        Element tmpElement;
+        System.out.println(diagramNode.getNodeName() + " " + diagramNode.getChildNodes().size());
+        for(DiagramNode child: diagramNode.getChildNodes()){
+            tmpElement = xmlDocument.createElement(child.getNodeName());
+            parentElement.appendChild(tmpElement);
+            addChildrenNodes(child, tmpElement, xmlDocument);
+        }
     }
 
 }

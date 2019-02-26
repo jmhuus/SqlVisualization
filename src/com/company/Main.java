@@ -6,11 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 public class Main {
 
@@ -90,7 +86,9 @@ public class Main {
 
 
         // Retrieve XML
-        Document xmlDocument = XmlConstructor.getXmlDiagram(diagramNodeManager);
+        XmlConstructor xmlConstructor = new XmlConstructor(diagramNodeManager);
+        Document xmlDocument = xmlConstructor.getXmlDiagram();
+        System.out.println(xmlDocument.toString());
 
     }
 }
