@@ -89,32 +89,8 @@ public class Main {
         }
 
 
-        // Find root node; node with no parent nodes
-        // TODO: find a better way to begin XML construction recursion
-        String rootNodeName = null;
-        for(String nodeName: diagramNodeManager.getDiagramNodes().keySet()){
-            if(diagramNodeManager.getDiagramNodes().get(nodeName).getParentNodes().size()==0){
-                rootNodeName = nodeName;
-            }
-        }
+        // Retrieve XML
+        Document xmlDocument = XmlConstructor.getXmlDiagram(diagramNodeManager);
 
-
-        try {
-            // Construct XML to represent diagram nodes
-            // Recursion to build XML tree
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document document = documentBuilder.newDocument();
-
-            // Root node to XML
-            DiagramNode root = diagramNodeManager.getDiagramNodes().get(rootNodeName);
-            Element rootElement = document.createElement(root.getNodeName());
-
-
-            for (DiagramNode node : root.getChildNodes()) {
-                // Parent nodes
-            }
-        }catch(ParserConfigurationException pce){
-            pce.printStackTrace();
-        }
     }
 }
