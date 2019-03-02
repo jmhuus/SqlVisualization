@@ -93,7 +93,7 @@ public class Main {
         System.out.println("========== XML ==========");
         System.out.println(XmlConstructor.getStringFromDocument(xmlDocument));
 
-        
+
         // TEST: JSON output
         String jsonString = new JSONObject()
                 .put("JSON1", "Hello World!")
