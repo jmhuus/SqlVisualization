@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 
 
@@ -91,6 +92,16 @@ public class Main {
         System.out.println();
         System.out.println("========== XML ==========");
         System.out.println(XmlConstructor.getStringFromDocument(xmlDocument));
+
+        
+        // TEST: JSON output
+        String jsonString = new JSONObject()
+                .put("JSON1", "Hello World!")
+                .put("JSON2", "Hello my World!")
+                .put("JSON3", new JSONObject()
+                        .put("key1", "value1")).toString();
+
+        System.out.println(jsonString);
 
     }
 }
