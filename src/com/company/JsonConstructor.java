@@ -7,5 +7,5 @@ public class JsonConstructor {
         this.diagramNodeManager = diagramNodeManager;
     }
 
-    
+
 }
