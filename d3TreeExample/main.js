@@ -45,14 +45,14 @@ function update(source) {
 		  return "translate(" + d.x + "," + d.y + ")"; });
 
   nodeEnter.append("circle")
-	  .attr("r", 10)
-	  .style("fill", "#fff");
+	  .attr("r", 10);
 
   nodeEnter.append("text")
 	  .attr("y", function(d) {
-		  return d.children || d._children ? -18 : 18; })
+		  return d.children || d._children ? -18 : 18;
+      })
 	  .attr("dy", ".35em")
-	  .attr("text-anchor", "middle")
+	  .attr("text-anchor", "left")
 	  .text(function(d) { return d.name; })
 	  .style("fill-opacity", 1);
 

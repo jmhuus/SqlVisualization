@@ -2,19 +2,19 @@ body{
 	background-color: rgb(31,36,39);
 	height: 100vh;
 }
+
 .node {
 	cursor: pointer;
+
 }
 
-.node circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 3px;
+circle {
+  fill: rgb(155,220,62);
 }
 
-.node text {
+text {
   font: 12px sans-serif;
-  fill: rgb(255,255,255);
+  fill: rgb(150,150,150);
 }
 
 .link {
