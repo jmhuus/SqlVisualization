@@ -50,7 +50,7 @@ INTO ##Table5
 FROM ##Table4 AS T1
 
 
-
+-- This is a random comment to test if the parser breaks
 SELECT
 	T1.Field1,
 	T1.Field2,
@@ -73,5 +73,42 @@ SELECT
 	T1.Field6,
 	T1.Field7,
 	'Hello World' AS RandomField
+INTO ##Table7
+FROM ##Table4 AS T1
+
+SELECT
+	T1.Field1,
+	T1.Field2,
+	T1.Field3,
+	T1.Field4,
+	T1.Field5,
+	T1.Field6,
+	T1.Field7,
+	'Hello World' AS RandomField
+INTO ##Table8
+FROM ##Table4 AS T1
+
+
+SELECT
+	T1.Field1,
+	T1.Field2,
+	T1.Field3,
+	T1.Field4,
+	T1.Field5,
+	T1.Field6,
+	T1.Field7,
+	'Hello World' AS RandomField
 INTO ##Table2
+FROM ##Table1 AS T1
+
+SELECT
+	T1.Field1,
+	T1.Field2,
+	T1.Field3,
+	T1.Field4,
+	T1.Field5,
+	T1.Field6,
+	T1.Field7,
+	'Hello World' AS RandomField
+INTO ##Table3
 FROM ##Table1 AS T1
