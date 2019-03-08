@@ -28,12 +28,12 @@ public class JsonConstructor {
                 // Ensure parent exists
                 if(diagramNodeManager.getDiagramNode(nodeName).getParentNodes().iterator().hasNext()){
                     jsonData.put("name", nodeName)
-                            .put(PARENT_JSON_ATTRIBUTE, diagramNodeManager.getDiagramNode(nodeName).getParentNodes().iterator().next().getNodeName())
-                            .put(CHILD_JSON_ATTRIBUTE, getChildJsonDataArray(diagramNodeManager, nodeName));
+                            .put(CHILD_JSON_ATTRIBUTE, diagramNodeManager.getDiagramNode(nodeName).getParentNodes().iterator().next().getNodeName())
+                            .put(PARENT_JSON_ATTRIBUTE, getChildJsonDataArray(diagramNodeManager, nodeName));
                 }else{
                     jsonData.put("name", nodeName)
-                            .put(PARENT_JSON_ATTRIBUTE, "null")
-                            .put(CHILD_JSON_ATTRIBUTE, getChildJsonDataArray(diagramNodeManager, nodeName));
+                            .put(CHILD_JSON_ATTRIBUTE, "null")
+                            .put(PARENT_JSON_ATTRIBUTE, getChildJsonDataArray(diagramNodeManager, nodeName));
                 }
             }
         }

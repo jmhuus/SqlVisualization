@@ -1,28 +1,5 @@
 var treeData = [
-  {
-    "name": "Top Level",
-    "parent": "null",
-    "children": [
-      {
-        "name": "Level 2: A",
-        "parent": "Top Level",
-        "children": [
-          {
-            "name": "Son of A",
-            "parent": "Level 2: A"
-          },
-          {
-            "name": "Daughter of A",
-            "parent": "Level 2: A"
-          }
-        ]
-      },
-      {
-        "name": "Level 2: B",
-        "parent": "Top Level"
-      }
-    ]
-  }
+{"parent":"null","children":[{"parent":"##Table1","children":[{"parent":"SELECT1","children":[{"parent":"##Table3","children":[{"parent":"null","children":[],"name":"##Table3"}],"name":"SELECT1"},{"parent":"##Table2","children":[{"parent":"null","children":[],"name":"##Table2"}],"name":"SELECT2"}],"name":"##Table1"}],"name":"SELECT0"}],"name":"Server1.dbo.SererTable1"}
 ];
 
 // ************** Generate the tree diagram	 *****************
