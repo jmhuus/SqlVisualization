@@ -1,5 +1,5 @@
 var treeData = [
-{"parent":"null","children":[{"parent":"##Table1","children":[{"parent":"SELECT1","children":[{"parent":"##Table3","children":[{"parent":"null","children":[],"name":"##Table3"}],"name":"SELECT1"},{"parent":"##Table2","children":[{"parent":"null","children":[],"name":"##Table2"}],"name":"SELECT2"}],"name":"##Table1"}],"name":"SELECT0"}],"name":"Server1.dbo.SererTable1"}
+{"parent":"null","children":[{"parent":"##Table1","children":[{"parent":"SELECT1","children":[{"parent":"##Table3","children":[{"parent":"null","children":[],"name":"##Table3"}],"name":"SELECT1"},{"parent":"##Table4","children":[{"parent":"SELECT3","children":[{"parent":"##Table5","children":[{"parent":"null","children":[],"name":"##Table5"}],"name":"SELECT3"},{"parent":"##Table6","children":[{"parent":"null","children":[],"name":"##Table6"}],"name":"SELECT4"}],"name":"##Table4"}],"name":"SELECT2"},{"parent":"##Table2","children":[{"parent":"null","children":[],"name":"##Table2"}],"name":"SELECT5"}],"name":"##Table1"}],"name":"SELECT0"}],"name":"Server1.dbo.SererTable1"}
 ];
 
 // ************** Generate the tree diagram	 *****************

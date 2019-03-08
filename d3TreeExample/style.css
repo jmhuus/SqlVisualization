@@ -1,5 +1,6 @@
 body{
 	background-color: rgb(31,36,39);
+	height: 100vh;
 }
 .node {
 	cursor: pointer;
