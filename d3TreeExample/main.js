@@ -28,7 +28,7 @@ update(root);
 function update(source) {
 
   // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse(),
+  var nodes = tree.nodes(source).reverse(),
 	  links = tree.links(nodes);
 
   // Normalize for fixed-depth.
