@@ -97,14 +97,7 @@ public class Main {
 
         // TEST: JSON output
         JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
-        System.out.println(jsonConstructor.getJsonDiagram());
-//        String jsonString = new JSONObject()
-//                .put("JSON1", "Hello World!")
-//                .put("JSON2", "Hello my World!")
-//                .put("JSON3", new JSONArray().put(new JSONObject()
-//                        .put("element1", "value1")
-//                        .put("element2", "value2")))
-//                    .toString();
-//        System.out.println(jsonString);
+        String json = jsonConstructor.getJsonDiagram();
+
     }
 }
