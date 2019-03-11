@@ -98,6 +98,26 @@ public class Main {
         // TEST: JSON output
         JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
         String json = jsonConstructor.getJsonDiagram();
+        try {
+            
+            // Build Javascript and insert data
+            File file = new File("./main.jsq");
+            List<String> lines = FileUtils.readLines(file, "UTF-8");
+            StringBuilder newJavascript = new StringBuilder();
+            for(String line: lines){
+                if(line.contains("$$JsonData$$")){
+                    newJavascript.append(json);
+                }else{
+                    newJavascript.append(line);
+                }
+            }
 
+            // Write new Javascript file
+            File newFile = new File("test.txt");
+            FileUtils.write(newFile, newJavascript.toString(), "UTF-8");
+
+        } catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 }

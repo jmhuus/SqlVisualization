@@ -4,7 +4,6 @@ package com.company;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
 public class JsonConstructor {
     private static String PARENT_JSON_ATTRIBUTE = "children";
