@@ -1,6 +1,6 @@
 var treeData = [
 
-{"parent":"null","children":[{"parent":"##Table1","children":[{"parent":"SELECT1","children":[{"parent":"##Table3","children":[{"parent":"null","children":[],"name":"##Table3"}],"name":"SELECT1"},{"parent":"##Table4","children":[{"parent":"SELECT3","children":[{"parent":"##Table5","children":[{"parent":"null","children":[],"name":"##Table5"}],"name":"SELECT3"},{"parent":"##Table6","children":[{"parent":"null","children":[],"name":"##Table6"}],"name":"SELECT4"},{"parent":"##Table7","children":[{"parent":"null","children":[],"name":"##Table7"}],"name":"SELECT5"},{"parent":"##Table8","children":[{"parent":"null","children":[],"name":"##Table8"}],"name":"SELECT6"}],"name":"##Table4"}],"name":"SELECT2"},{"parent":"##Table2","children":[{"parent":"null","children":[],"name":"##Table2"}],"name":"SELECT7"},{"parent":"##Table3","children":[{"parent":"null","children":[],"name":"##Table3"}],"name":"SELECT8"}],"name":"##Table1"}],"name":"SELECT0"}],"name":"Server1.dbo.SererTable1"}
+{}
 ];
 
 
