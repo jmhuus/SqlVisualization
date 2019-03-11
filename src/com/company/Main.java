@@ -65,31 +65,12 @@ public class Main {
             }
             statements.add(stringBuilder.toString());
 
-            // TEST: statements are being grouped correctly
-            for(String statement: statements){
-                System.out.println(statement);
-                diagramNodeManager.addDiagramNode(statement);
-            }
-
-            // TEST: nodes initialized correctly
-            for(String diagramNodeName: diagramNodeManager.getDiagramNodes().keySet()){
-                System.out.println("\n\n========== "+diagramNodeName+" ==========");
-                System.out.println("parent nodes:");
-                for(DiagramNode diagramNode: diagramNodeManager.getDiagramNode(diagramNodeName).getParentNodes()){
-                    System.out.println("    "+diagramNode.getNodeName());
-                }
-                System.out.println("\nchild nodes:");
-                for(DiagramNode diagramNode: diagramNodeManager.getDiagramNode(diagramNodeName).getChildNodes()){
-                    System.out.println("    "+diagramNode.getNodeName());
-                }
-            }
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
 
 
-
-        // TEST: JSON output
+        // Load data into visualization and open
         JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
         String json = jsonConstructor.getJsonDiagram();
         try {
