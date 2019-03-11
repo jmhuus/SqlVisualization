@@ -64,7 +64,7 @@ public class Main {
                 stringBuilder.append(line + " \n");
             }
             statements.add(stringBuilder.toString());
-            
+
             for(String statement: statements){
                 diagramNodeManager.addDiagramNode(statement);
             }
