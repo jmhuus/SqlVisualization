@@ -1,3 +1,18 @@
+Trying to decide how to orchestrate frontend/backend.
+	web app
+	    - frontend and back-end built in Javascript, HTML, CSS
+	    - backend (SQL parsing) built in Javascript, not sure if Javascript can parse SQL statements; perhaps there isn't an open-source library
+	desktop tool
+	    - frontend(client-side): Javascript, HTML, CSS	
+	    - backend(server-side): Java
+	hybrid
+	    - frontend(client-side): Javascript, HTML, CSS
+	    - backend(server-side): Java
+
+
+
+
+
 ToDo
 	- Change autoConShapes to connect two shapes with a straight line instead of a square line
 
