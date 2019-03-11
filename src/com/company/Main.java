@@ -98,9 +98,11 @@ public class Main {
 
             File visualizationHtml = new File("file:///C:/Users/jorda/Documents/Computer%20Science/Projects/Repos/SqlVisualization/D3Visualization/index.html");
             Process p = new ProcessBuilder("cmd", "/c", "start", "chrome", visualizationHtml.getPath()).start();
+            int exitCode = p.waitFor();
+            System.out.println(exitCode==0 ? "Visualization Successful":"Visualization Failed; exit code: "+exitCode);
 
-        } catch(IOException ioe){
-            ioe.printStackTrace();
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
