@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,34 +88,30 @@ public class Main {
         }
 
 
-        // TEST: XML output
-        XmlConstructor xmlConstructor = new XmlConstructor(diagramNodeManager);
-        Document xmlDocument = xmlConstructor.getXmlDiagram();
-        System.out.println();
-        System.out.println("========== XML ==========");
-        System.out.println(XmlConstructor.getStringFromDocument(xmlDocument));
-
 
         // TEST: JSON output
         JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
         String json = jsonConstructor.getJsonDiagram();
         try {
-            
+
             // Build Javascript and insert data
-            File file = new File("./main.jsq");
+            File file = new File("D3Visualization/src.js");
             List<String> lines = FileUtils.readLines(file, "UTF-8");
             StringBuilder newJavascript = new StringBuilder();
             for(String line: lines){
                 if(line.contains("$$JsonData$$")){
                     newJavascript.append(json);
                 }else{
-                    newJavascript.append(line);
+                    newJavascript.append(line+"\n");
                 }
             }
 
             // Write new Javascript file
-            File newFile = new File("test.txt");
+            File newFile = new File("D3Visualization/main.js");
             FileUtils.write(newFile, newJavascript.toString(), "UTF-8");
+
+            File visualizationHtml = new File("file:///C:/Users/jorda/Documents/Computer%20Science/Projects/Repos/SqlVisualization/D3Visualization/index.html");
+            Process p = new ProcessBuilder("cmd", "/c", "start", "chrome", visualizationHtml.getPath()).start();
 
         } catch(IOException ioe){
             ioe.printStackTrace();
