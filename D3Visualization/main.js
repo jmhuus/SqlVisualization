@@ -1,7 +1,3 @@
-var dataArray = [
-{"parent":"null","children":[{"parent":"##Table1","children":[{"parent":"SELECT1","children":[{"parent":"##Table3","children":[{"parent":"null","children":[],"name":"##Table3"}],"name":"SELECT1"},{"parent":"##Table4","children":[{"parent":"null","children":[],"name":"##Table4"}],"name":"SELECT2"}],"name":"##Table1"}],"name":"SELECT0"}],"name":"Server1.dbo.SererTable1"}
-];
-
 // ************** Generate the tree diagram	 *****************
 var margin = {top: 40, right: 120, bottom: 20, left: 120},
 	width = 960 - margin.right - margin.left,
