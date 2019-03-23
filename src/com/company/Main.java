@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.jsqlparser.JSQLParserException;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,12 +45,12 @@ public class Main {
             StringBuilder stringBuilder = new StringBuilder();
             List<String> statements = new ArrayList<>();
             boolean statementFound = false;
-            for (String line: lines) {
+            for (String line : lines) {
                 // Append each query line
                 if (line.contains("SELECT")) {
 
                     // Add query node to diagram
-                    if(statementFound){
+                    if (statementFound) {
                         statements.add(stringBuilder.toString());
                     }
 
@@ -63,11 +64,18 @@ public class Main {
                 // Begin building statement SQL string
                 stringBuilder.append(line + " \n");
             }
+
+            // Append String
             statements.add(stringBuilder.toString());
 
-            for(String statement: statements){
+
+            // References to all DiagramNodes
+            for (String statement : statements) {
                 diagramNodeManager.addDiagramNode(statement);
             }
+        } catch (JSQLParserException jspe){
+            // Bad SQL statement syntax
+            System.out.println(jspe.getCause());
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
@@ -81,7 +89,6 @@ public class Main {
             // Write JSON into Javascript file
             File newFile = new File("D3Visualization/data.js");
             FileUtils.write(newFile, "var dataArray = ["+json+"];", "UTF-8");
-            System.out.println(json);
 
             // Open visualization
             File visualizationHtml = new File("file:///C:/Users/jorda/Documents/Computer%20Science/Projects/Repos/SqlVisualization/D3Visualization/index.html");

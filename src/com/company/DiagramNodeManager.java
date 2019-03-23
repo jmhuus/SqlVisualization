@@ -1,10 +1,13 @@
 package com.company;
 
+import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.statement.Statement;
 
 import java.io.StringReader;
 import java.util.HashMap;
+
+import net.sf.jsqlparser.parser.ParseException;
 
 
 class DiagramNodeManager {
@@ -20,16 +23,12 @@ class DiagramNodeManager {
      * Adds node objects to DiagramNodeManager
      * @param queryString multi-line SQL query string - recognized by SQL commands (SELECT, DELETE, etc.)
      */
-    void addDiagramNode(String queryString){
+    void addDiagramNode(String queryString) throws JSQLParserException{
         DiagramNode diagramNode = new DiagramNode();
-        try {
-            // Parse and return select statement items
-            CCJSqlParserManager pm = new CCJSqlParserManager();
-            Statement statement = pm.parse(new StringReader(queryString));
-            statement.accept(new StatementDesignator(diagramNode, this));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        // Parse and return select statement items
+        CCJSqlParserManager pm = new CCJSqlParserManager();
+        Statement statement = pm.parse(new StringReader(queryString));
+        statement.accept(new StatementDesignator(diagramNode, this));
     }
 
 
