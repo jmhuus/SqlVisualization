@@ -1,9 +1,8 @@
-var treeData = [
-
-{}
+var dataArray = [
+{"parent":"null","children":[{"parent":"##Table1","children":[{"parent":"SELECT1","children":[{"parent":"##Table3","children":[{"parent":"null","children":[],"name":"##Table3"}],"name":"SELECT1"},{"parent":"##Table4","children":[{"parent":"null","children":[],"name":"##Table4"}],"name":"SELECT2"}],"name":"##Table1"}],"name":"SELECT0"}],"name":"Server1.dbo.SererTable1"}
 ];
 
-
+// ************** Generate the tree diagram	 *****************
 var margin = {top: 40, right: 120, bottom: 20, left: 120},
 	width = 960 - margin.right - margin.left,
 	height = 500 - margin.top - margin.bottom;
@@ -19,17 +18,17 @@ var diagonal = d3.svg.diagonal()
 var svg = d3.select("body").append("svg")
 	.attr("width", "100%")
 	.attr("height", "100%")
-    .append("g")
+  .append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-root = treeData[0];
+root = dataArray[0];
 
 update(root);
 
 function update(source) {
 
   // Compute the new tree layout.
-  var nodes = tree.nodes(source).reverse(),
+  var nodes = tree.nodes(root).reverse(),
 	  links = tree.links(nodes);
 
   // Normalize for fixed-depth.

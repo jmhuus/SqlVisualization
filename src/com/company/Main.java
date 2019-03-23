@@ -81,6 +81,7 @@ public class Main {
             // Write JSON into Javascript file
             File newFile = new File("D3Visualization/data.js");
             FileUtils.write(newFile, "var dataArray = ["+json+"];", "UTF-8");
+            System.out.println(json);
 
             // Open visualization
             File visualizationHtml = new File("file:///C:/Users/jorda/Documents/Computer%20Science/Projects/Repos/SqlVisualization/D3Visualization/index.html");
