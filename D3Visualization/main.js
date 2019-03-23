@@ -74,10 +74,11 @@ function update(source) {
 
 // Error errorMessage
 // See errorMessage.js
-treeGroup.selectAll("tspan")
+svg.selectAll("tspan")
 	.data(errorMessage)
 	.enter()
 	.append("text")
+		.attr("class", "error-message")
 		.attr("x", "60%")
-		.attr("y", function(d, i){ return i * 15; })
+		.attr("y", function(d, i){ return (i * 20)+20; })
 		.text(function(d){ return d; });

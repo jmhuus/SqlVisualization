@@ -22,3 +22,8 @@ text {
   stroke: #ccc;
   stroke-width: 2px;
 }
+
+.error-message {
+	fill: rgba(163, 71, 63,0.50);
+	font-size: 17px;
+}

@@ -30,11 +30,16 @@ public class VisualizationManager {
         }
     }
     private static void setErrorMessage(String errorMessage){
+        // Write message to errorMessage.js
         try {
-            // Write error message to Javascript file
-            File newFile = new File(ERROR_MESSAGE_DATA_PATH);
-            errorMessage = errorMessage.replace("\n", "\\n");
-            FileUtils.write(newFile, "var errorMessage = '"+errorMessage+"';", "UTF-8");
+            if(errorMessage == null || errorMessage.equals("")){
+                File newFile = new File(ERROR_MESSAGE_DATA_PATH);
+                FileUtils.write(newFile, "var errorMessage = [''];", "UTF-8");
+            }else{
+                File newFile = new File(ERROR_MESSAGE_DATA_PATH);
+                errorMessage = errorMessage.replace("\n", "', '");
+                FileUtils.write(newFile, "var errorMessage = ['Woops! SQL syntax error:', '', '"+errorMessage+"'];", "UTF-8");
+            }
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
