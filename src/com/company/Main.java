@@ -84,6 +84,6 @@ public class Main {
 
 
         VisualizationManager.openVisualization(diagramNodeManager, errorMessage);
-        
+
     }
 }

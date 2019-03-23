@@ -17,6 +17,7 @@ public class VisualizationManager {
         JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
         String json = jsonConstructor.getJsonDiagram();
         setJsonDataArray(json);
+        setErrorMessage(errorMessage);
         openVisualizationBrowser();
     }
     private static void setJsonDataArray(String jsonData){
@@ -29,7 +30,7 @@ public class VisualizationManager {
         }
     }
     private static void setErrorMessage(String errorMessage){
-
+        System.out.println(errorMessage);
     }
     private static void openVisualizationBrowser(){
         try {
