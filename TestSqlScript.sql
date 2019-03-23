@@ -20,6 +20,7 @@ SELECT
 	T1.Field6,
 	T1.Field7,
 	-- This is a test comment
+	
 	'Hello World' AS RandomField
 INTO ##Table3
 FROM ##Table1 AS T1
