@@ -16,6 +16,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String errorMessage = "";
+
         // All nodes tracked within DiagramNodeManager
         DiagramNodeManager diagramNodeManager = new DiagramNodeManager();
         List<String> sqlCommands = new ArrayList<>();
@@ -75,29 +77,13 @@ public class Main {
             }
         } catch (JSQLParserException jspe){
             // Bad SQL statement syntax
-            System.out.println(jspe.getCause());
+            errorMessage = jspe.getCause().toString();
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
 
 
-        // Load data into visualization and open
-        JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
-        String json = jsonConstructor.getJsonDiagram();
-        try {
-
-            // Write JSON into Javascript file
-            File newFile = new File("D3Visualization/data.js");
-            FileUtils.write(newFile, "var dataArray = ["+json+"];", "UTF-8");
-
-            // Open visualization
-            File visualizationHtml = new File("file:///C:/Users/jorda/Documents/Computer%20Science/Projects/Repos/SqlVisualization/D3Visualization/index.html");
-            Process p = new ProcessBuilder("cmd", "/c", "start", "chrome", visualizationHtml.getPath()).start();
-            int exitCode = p.waitFor();
-            System.out.println(exitCode==0 ? "Visualization Successful":"Visualization Failed; exit code: "+exitCode);
-
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+        VisualizationManager.openVisualization(diagramNodeManager, errorMessage);
+        
     }
 }
