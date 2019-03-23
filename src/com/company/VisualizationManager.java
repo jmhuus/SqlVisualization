@@ -22,7 +22,7 @@ public class VisualizationManager {
     }
     private static void setJsonDataArray(String jsonData){
         try {
-            // Write JSON into Javascript file
+            // Write JSON to Javascript file
             File newFile = new File(JSON_DATA_PATH);
             FileUtils.write(newFile, "var dataArray = [" + jsonData + "];", "UTF-8");
         } catch (IOException ioe){
@@ -30,7 +30,14 @@ public class VisualizationManager {
         }
     }
     private static void setErrorMessage(String errorMessage){
-        System.out.println(errorMessage);
+        try {
+            // Write error message to Javascript file
+            File newFile = new File(ERROR_MESSAGE_DATA_PATH);
+            errorMessage = errorMessage.replace("\n", "\\n");
+            FileUtils.write(newFile, "var errorMessage = '"+errorMessage+"';", "UTF-8");
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
     }
     private static void openVisualizationBrowser(){
         try {

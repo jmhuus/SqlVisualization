@@ -11,14 +11,22 @@ var tree = d3.layout.tree()
 var diagonal = d3.svg.diagonal()
 	.projection(function(d) { return [d.x, d.y]; });
 
-var svg = d3.select("body").append("svg")
+
+// SVG to contain group
+var svg = d3.select("body")
+	.append("svg")
 	.attr("width", "100%")
-	.attr("height", "100%")
-  .append("g")
+	.attr("height", "100%");
+
+// Tree group to contain SQL visualization
+var treeGroup = svg.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
+// First JSON array in dataArray
 root = dataArray[0];
 
+// Call function; draw SQL visualzation
 update(root);
 
 function update(source) {
@@ -31,7 +39,7 @@ function update(source) {
   nodes.forEach(function(d) { d.y = d.depth * 100; });
 
   // Declare the nodes…
-  var node = svg.selectAll("g.node")
+  var node = treeGroup.selectAll("g.node")
 	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
   // Enter the nodes.
@@ -53,7 +61,7 @@ function update(source) {
 	  .style("fill-opacity", 1);
 
   // Declare the links…
-  var link = svg.selectAll("path.link")
+  var link = treeGroup.selectAll("path.link")
 	  .data(links, function(d) { return d.target.id; });
 
   // Enter the links.
@@ -62,3 +70,14 @@ function update(source) {
 	  .attr("d", diagonal);
 
 }
+
+
+// Error errorMessage
+// See errorMessage.js
+treeGroup.selectAll("tspan")
+	.data(errorMessage)
+	.enter()
+	.append("text")
+		.attr("x", "60%")
+		.attr("y", function(d, i){ return i * 15; })
+		.text(function(d){ return d; });
