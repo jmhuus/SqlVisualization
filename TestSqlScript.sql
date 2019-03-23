@@ -1,3 +1,4 @@
+-- This is a test comment
 SELECT
 	T1.Field1,
 	T1.Field2,
