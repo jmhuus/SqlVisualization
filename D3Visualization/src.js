@@ -1,10 +1,3 @@
-var treeData = [
-
-$$JsonData$$
-
-];
-
-
 var margin = {top: 40, right: 120, bottom: 20, left: 120},
 	width = 960 - margin.right - margin.left,
 	height = 500 - margin.top - margin.bottom;
@@ -23,7 +16,7 @@ var svg = d3.select("body").append("svg")
     .append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-root = treeData[0];
+root = dataArray[0];
 
 update(root);
 

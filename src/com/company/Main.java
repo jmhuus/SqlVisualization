@@ -78,22 +78,11 @@ public class Main {
         String json = jsonConstructor.getJsonDiagram();
         try {
 
-            // Build Javascript and insert data
-            File file = new File("D3Visualization/src.js");
-            List<String> lines = FileUtils.readLines(file, "UTF-8");
-            StringBuilder newJavascript = new StringBuilder();
-            for(String line: lines){
-                if(line.contains("$$JsonData$$")){
-                    newJavascript.append(json);
-                }else{
-                    newJavascript.append(line+"\n");
-                }
-            }
+            // Write JSON into Javascript file
+            File newFile = new File("D3Visualization/data.js");
+            FileUtils.write(newFile, "var dataArray = ["+json+"];", "UTF-8");
 
-            // Write new Javascript file
-            File newFile = new File("D3Visualization/main.js");
-            FileUtils.write(newFile, newJavascript.toString(), "UTF-8");
-
+            // Open visualization
             File visualizationHtml = new File("file:///C:/Users/jorda/Documents/Computer%20Science/Projects/Repos/SqlVisualization/D3Visualization/index.html");
             Process p = new ProcessBuilder("cmd", "/c", "start", "chrome", visualizationHtml.getPath()).start();
             int exitCode = p.waitFor();
