@@ -24,7 +24,7 @@ FROM ##Table1 AS T1
 
 
 SELECT
-	T1.Field1
+	T1.Field1,
 	T1.Field2,
 	T1.Field3,
 	T1.Field4,
