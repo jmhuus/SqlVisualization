@@ -10,7 +10,7 @@ SELECT
 INTO ##Table1
 FROM Server1.dbo.SererTable1 AS T1
 
-
+-- This is a test comment
 SELECT
 	T1.Field1,
 	T1.Field2,
