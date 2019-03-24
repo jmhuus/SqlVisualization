@@ -14,6 +14,7 @@ package com.company;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.sf.jsqlparser.JSQLParserException;
@@ -29,21 +30,22 @@ public class Main {
 
         // All nodes tracked within DiagramNodeManager
         DiagramNodeManager diagramNodeManager = new DiagramNodeManager();
-        List<String> sqlCommands = new ArrayList<>();
-        sqlCommands.add("ALTER");
-        sqlCommands.add("COMMENT");
-        sqlCommands.add("CREATE");
-        sqlCommands.add("DELETE");
-        sqlCommands.add("DROP");
-        sqlCommands.add("EXECUTE");
-        sqlCommands.add("INSERT");
-        sqlCommands.add("MERGE");
-        sqlCommands.add("REPLACE");
-        sqlCommands.add("SELECT");
-        sqlCommands.add("TRUNCATE");
-        sqlCommands.add("UPDATE");
-        sqlCommands.add("UPSERT");
-        sqlCommands.add("VALUES");
+        String[] sqlCommands = {
+            "ALTER",
+            "COMMENT",
+            "CREATE",
+            "DELETE",
+            "DROP",
+            "EXECUTE",
+            "INSERT",
+            "MERGE",
+            "REPLACE",
+            "SELECT",
+            "TRUNCATE",
+            "UPDATE",
+            "UPSERT",
+            "VALUES"
+        };
 
 
         try {
@@ -57,7 +59,7 @@ public class Main {
             boolean statementFound = false;
             for (String line : lines) {
                 // Append each query line
-                if (line.contains("SELECT")) {
+                if (stringContainsItemFromList(line, sqlCommands) && !(isSqlComment(line))) {
 
                     // Add query node to diagram
                     if (statementFound) {
@@ -93,5 +95,23 @@ public class Main {
 
         VisualizationManager.openVisualization(diagramNodeManager, errorMessage);
 
+    }
+
+    /**
+     * Determines if a string contains any element in string array
+     * @param inputStr to search for specific items
+     * @param items to search for in a string
+     * @return True if the line contains at least one item in the list
+     */
+    public static boolean stringContainsItemFromList(String inputStr, String[] items) {
+        inputStr = inputStr.toUpperCase();
+        return Arrays.stream(items).parallel().anyMatch(inputStr::contains);
+    }
+
+
+
+    public static boolean isSqlComment(String sqlLine){
+        sqlLine = sqlLine.trim();
+        return (sqlLine.substring(0, 2).equals("--")) || sqlLine.substring(0, 2).equals("/*") ? true : false;
     }
 }
