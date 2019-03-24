@@ -13,6 +13,11 @@ public class VisualizationManager {
     private static final String ERROR_MESSAGE_DATA_PATH = "D3Visualization/errorMessage.js";
 
 
+    /**
+     * Parent method used to open SQL Visualization
+     * @param diagramNodeManager
+     * @param errorMessage
+     */
     public static void openVisualization(DiagramNodeManager diagramNodeManager, String errorMessage){
         JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
         String json = jsonConstructor.getJsonDiagram();
@@ -20,6 +25,8 @@ public class VisualizationManager {
         setErrorMessage(errorMessage);
         openVisualizationBrowser();
     }
+
+    // Export JSON data to data.js
     private static void setJsonDataArray(String jsonData){
         try {
             // Write JSON to Javascript file
@@ -29,6 +36,8 @@ public class VisualizationManager {
             ioe.printStackTrace();
         }
     }
+
+    // Export error message to errorMessage.js
     private static void setErrorMessage(String errorMessage){
         // Write message to errorMessage.js
         try {
@@ -44,6 +53,9 @@ public class VisualizationManager {
             ioe.printStackTrace();
         }
     }
+
+    // TODO: Migrate to front-end framework
+    // Open D3 visualization tree in browser (Chrome)
     private static void openVisualizationBrowser(){
         try {
             File visualizationHtml = new File(HTML_INDEX_PATH);

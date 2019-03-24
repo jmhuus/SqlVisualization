@@ -1,15 +1,24 @@
+/*
+  _________________  .____      ____   ____.__                    .__  .__                __  .__
+ /   _____/\_____  \ |    |     \   \ /   /|__| ________ _______  |  | |__|____________ _/  |_|__| ____   ____
+ \_____  \  /  / \  \|    |      \   Y   / |  |/  ___/  |  \__  \ |  | |  \___   /\__  \\   __\  |/  _ \ /    \
+ /        \/   \_/.  \    |___    \     /  |  |\___ \|  |  // __ \|  |_|  |/    /  / __ \|  | |  (  <_> )   |  \
+/_______  /\_____\ \_/_______ \    \___/   |__/____  >____/(____  /____/__/_____ \(____  /__| |__|\____/|___|  /
+        \/        \__>       \/                    \/           \/              \/     \/                    \/
+ */
+
+
+
+
 package com.company;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.jsqlparser.JSQLParserException;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.w3c.dom.Document;
+
 
 
 public class Main {
@@ -38,12 +47,11 @@ public class Main {
 
 
         try {
-            /**
-             * ALTER, COMMENT, CREATE, DELETE, DROP, EXECUTE, INSERT, MERGE
-             * REPLACE, SELECT, TRUNCATE, UPDATE, UPSERT, VALUES
-             */
+            // Read file
             File file = new File("./TestSqlScript.sql");
             List<String> lines = FileUtils.readLines(file, "UTF-8");
+
+            // Read queries and build diagram nodes
             StringBuilder stringBuilder = new StringBuilder();
             List<String> statements = new ArrayList<>();
             boolean statementFound = false;
