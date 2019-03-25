@@ -8,7 +8,7 @@ select
 	T1.Field6,
 	T1.Field7
 INTO ##Table1
-FROM Server1.dbo.SererTable1 AS T1
+FROM Server1.dbo.SererTable1 AS T1;
 
 -- This is a test comment
 SELECT
@@ -23,7 +23,7 @@ SELECT
 
 	'Hello World' AS RandomField
 INTO ##Table3
-FROM ##Table1 AS T1
+FROM ##Table1 AS T1;
 
 
 SELECT
@@ -36,7 +36,7 @@ SELECT
 	T1.Field7,
 	'Hello World' AS RandomField
 INTO ##Table4
-FROM ##Table1 AS T1
+FROM ##Table1 AS T1;
 
 
 SELECT
@@ -49,4 +49,4 @@ SELECT
 	T1.Field7,
 	'Hello World' AS RandomField
 INTO ##Table5
-FROM ##Table4 AS T1
+FROM ##Table4 AS T1;
