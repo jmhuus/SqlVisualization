@@ -12,7 +12,7 @@ FROM Server1.dbo.SererTable1 AS T1;
 
 -- This is a test comment
 SELECT
-	T1.Field1
+	T1.Field1,
 	T1.Field2,
 	T1.Field3,
 	T1.Field4,
@@ -24,6 +24,55 @@ SELECT
 	'Hello World' AS RandomField
 INTO ##Table3
 FROM ##Table1 AS T1;
+
+
+-- This is a test comment
+SELECT
+	T1.Field1,
+	T1.Field2,
+	T1.Field3,
+	T1.Field4,
+	T1.Field5,
+	T1.Field6,
+	T1.Field7,
+	-- This is a test comment
+
+	'Hello World' AS RandomField
+INTO ##Table10
+FROM ##Table1 AS T1;
+
+
+-- This is a test comment
+SELECT
+	T1.Field1,
+	T1.Field2,
+	T1.Field3,
+	T1.Field4,
+	T1.Field5,
+	T1.Field6,
+	T1.Field7,
+	-- This is a test comment
+
+	'Hello World' AS RandomField
+INTO ##Table11
+FROM ##Table10 AS T1;
+
+
+
+SELECT
+	T1.Field1,
+	T1.Field2,
+	T1.Field3,
+	T1.Field4,
+	T1.Field5,
+	T1.Field6,
+	T1.Field7,
+	-- This is a test comment
+
+	'Hello World' AS RandomField
+INTO ##Table12
+FROM ##Table10 AS T1;
+
 
 
 SELECT

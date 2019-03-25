@@ -8,9 +8,9 @@ import java.io.IOException;
 public class VisualizationManager {
 
     // TODO: build UI output path input
-    private static final String HTML_INDEX_PATH = "C:\\Users\\jordanhuus\\Documents\\Computer Science\\Repos\\SqlVisualization\\D3Visualization\\index.html";
-    private static final String JSON_DATA_PATH = "D3Visualization/data.js";
-    private static final String ERROR_MESSAGE_DATA_PATH = "D3Visualization/errorMessage.js";
+    private static final String HTML_INDEX_PATH = "D3Visualization\\index.html";
+    private static final String JSON_DATA_PATH = "D3Visualization/tmp/data.js";
+    private static final String ERROR_MESSAGE_DATA_PATH = "D3Visualization/tmp/errorMessage.js";
 
 
     /**

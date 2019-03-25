@@ -1,6 +1,7 @@
-body{
+html, body{
 	background-color: rgb(31,36,39);
-	height: 100vh;
+	height: 100%;
+	margin: 20px;
 }
 
 .node {
