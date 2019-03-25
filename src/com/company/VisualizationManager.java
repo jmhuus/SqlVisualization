@@ -1,6 +1,5 @@
 package com.company;
 
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +7,7 @@ import java.io.IOException;
 public class VisualizationManager {
 
     // TODO: build UI output path input
-    private static final String HTML_INDEX_PATH = "D3Visualization\\index.html";
+    private static final String HTML_INDEX_PATH = "\\D3Visualization\\index.html";
     private static final String JSON_DATA_PATH = "D3Visualization/tmp/data.js";
     private static final String ERROR_MESSAGE_DATA_PATH = "D3Visualization/tmp/errorMessage.js";
 
@@ -58,7 +57,7 @@ public class VisualizationManager {
     // Open D3 visualization tree in browser (Chrome)
     private static void openVisualizationBrowser(){
         try {
-            File visualizationHtml = new File(HTML_INDEX_PATH);
+            File visualizationHtml = new File(System.getProperty("user.dir")+HTML_INDEX_PATH);
             Process p = new ProcessBuilder("cmd", "/c", "start", "chrome", visualizationHtml.getPath()).start();
             int exitCode = p.waitFor();
             System.out.println(exitCode == 0 ? "Visualization Successful" : "Visualization Failed; exit code: " + exitCode);
