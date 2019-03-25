@@ -1,0 +1,30 @@
+html, body{
+	background-color: rgb(31,36,39);
+	height: 100%;
+	margin: 20px;
+}
+
+.node {
+	cursor: pointer;
+
+}
+
+circle {
+  fill: rgb(155,220,62);
+}
+
+text {
+  font: 12px sans-serif;
+  fill: rgb(150,150,150);
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+.error-message {
+	fill: rgba(163, 71, 63,0.50);
+	font-size: 17px;
+}
