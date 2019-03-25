@@ -8,8 +8,6 @@
  */
 
 
-
-
 package com.company;
 
 import java.io.*;
@@ -61,8 +59,7 @@ public class Main {
             ioe.printStackTrace();
         }
 
-
+        // Open visualization in Chrome
         VisualizationManager.openVisualization(diagramNodeManager, errorMessage);
-
     }
 }

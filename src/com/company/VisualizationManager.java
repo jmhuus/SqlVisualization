@@ -36,6 +36,7 @@ public class VisualizationManager {
         }
     }
 
+    // TODO: specify SQL source and line number location of syntax error
     // Export error message to errorMessage.js
     private static void setErrorMessage(String errorMessage){
         // Write message to errorMessage.js
