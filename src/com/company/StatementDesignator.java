@@ -1,5 +1,6 @@
 package com.company;
 
+import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.*;
 import net.sf.jsqlparser.statement.alter.Alter;
 import net.sf.jsqlparser.statement.comment.Comment;
@@ -79,7 +80,28 @@ public class StatementDesignator implements StatementVisitor {
 
     @Override
     public void visit(CreateTable createTable) {
+        // Node type
+        diagramNode.setNodeType("CREATE TABLE");
 
+        // Node name
+        diagramNode.setNodeName(diagramNodeManager.getNewDiagramNodeQueryName("CREATE TABLE"));
+
+        // Add new diagramNode to DiagramNodeManager
+        diagramNodeManager.addDiagramNode(diagramNode);
+
+        // Add child node
+        Table table = createTable.getTable();
+        DiagramNode tmpNode;
+        if(! diagramNodeManager.nodeExists(table.getName())){
+            tmpNode = new DiagramNode();
+            tmpNode.setNodeType("TABLE");
+            tmpNode.setNodeName(table.getName());
+            tmpNode.addParent(diagramNode);
+            diagramNodeManager.addStatementToDiagram(tmpNode);
+        }else{
+            tmpNode = diagramNodeManager.getDiagramNode(table.getName());
+            tmpNode.addParent(diagramNode);
+        }
     }
 
     @Override
@@ -131,7 +153,7 @@ public class StatementDesignator implements StatementVisitor {
         diagramNode.setNodeName(diagramNodeManager.getNewDiagramNodeQueryName("SELECT"));
 
         // Add new diagramNode to DiagramNodeManager
-        diagramNodeManager.addDiagramNode(diagramNode);
+        diagramNodeManager.addStatementToDiagram(diagramNode);
 
         // Set parent (FROM tables) nodes
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
@@ -145,7 +167,7 @@ public class StatementDesignator implements StatementVisitor {
                 tmpNode.setNodeType("TABLE");
                 tmpNode.setNodeName(fromTableName);
                 tmpNode.addChildNode(diagramNode);
-                diagramNodeManager.addDiagramNode(tmpNode);
+                diagramNodeManager.addStatementToDiagram(tmpNode);
             }else{
                 tmpNode = diagramNodeManager.getDiagramNode(fromTableName);
                 tmpNode.addChildNode(diagramNode);

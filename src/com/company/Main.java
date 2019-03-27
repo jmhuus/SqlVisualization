@@ -50,7 +50,7 @@ public class Main {
 
             // References to all DiagramNodes
             for (Statement statement : statementList) {
-                diagramNodeManager.addDiagramNode(statement);
+                diagramNodeManager.addStatementToDiagram(statement);
             }
         } catch (JSQLParserException jspe){
             // Bad SQL statement syntax

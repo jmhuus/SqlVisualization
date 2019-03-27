@@ -24,7 +24,7 @@ class DiagramNodeManager {
      * Adds node objects to DiagramNodeManager
      * @param statement Parsed by CCJSqlParserUtil.parseStatements() and then passed individually
      */
-    void addDiagramNode(Statement statement) {
+    void addStatementToDiagram(Statement statement) {
         DiagramNode diagramNode = new DiagramNode();
         statement.accept(new StatementDesignator(diagramNode, this));
     }

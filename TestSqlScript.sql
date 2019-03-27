@@ -99,3 +99,16 @@ SELECT
 	'Hello World' AS RandomField
 INTO ##Table5
 FROM ##Table4 AS T1;
+
+
+
+
+CREATE TABLE ##TestTable1 (
+	FirstName NVARCHAR(100),
+	LastName NVARCHAR(100),
+	Gender NVARCHAR(15),
+	Age INT,
+	Address NVARCHAR(100),
+	City NVARCHAR(100),
+	ZipCode BIGINT
+)
