@@ -30,45 +30,44 @@ root = dataArray[0];
 update(root);
 
 function update(source) {
+	// Compute the new tree layout.
+	var nodes = tree.nodes(root).reverse();
+	var links = tree.links(nodes);
 
-  // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse(),
-	  links = tree.links(nodes);
+	// Normalize for fixed-depth.
+	nodes.forEach(function(d) { d.y = d.depth * 100; });
 
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 100; });
+	// Declare the nodes…
+	var node = treeGroup.selectAll("g.node")
+		.data(nodes, function(d) { return d.id || (d.id = ++i); });
 
-  // Declare the nodes…
-  var node = treeGroup.selectAll("g.node")
-	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+	// Enter the nodes.
+	var nodeEnter = node.enter().append("g")
+		.attr("class", "node")
+		.attr("transform", function(d) {
+			return "translate(" + d.x + "," + d.y + ")";
+		});
 
-  // Enter the nodes.
-  var nodeEnter = node.enter().append("g")
-	  .attr("class", "node")
-	  .attr("transform", function(d) {
-		  return "translate(" + d.x + "," + d.y + ")"; });
+	nodeEnter.append("circle")
+		.attr("r", 10);
 
-  nodeEnter.append("circle")
-	  .attr("r", 10);
+	nodeEnter.append("text")
+		.attr("y", function(d) {
+			return d.children || d._children ? -18 : 18;
+		})
+		.attr("dy", ".35em")
+		.attr("text-anchor", "left")
+		.text(function(d) { return d.name; })
+		.style("fill-opacity", 1);
 
-  nodeEnter.append("text")
-	  .attr("y", function(d) {
-		  return d.children || d._children ? -18 : 18;
-      })
-	  .attr("dy", ".35em")
-	  .attr("text-anchor", "left")
-	  .text(function(d) { return d.name; })
-	  .style("fill-opacity", 1);
+	// Declare the links…
+	var link = treeGroup.selectAll("path.link")
+		.data(links, function(d) { return d.target.id; });
 
-  // Declare the links…
-  var link = treeGroup.selectAll("path.link")
-	  .data(links, function(d) { return d.target.id; });
-
-  // Enter the links.
-  link.enter().insert("path", "g")
-	  .attr("class", "link")
-	  .attr("d", diagonal);
-
+	// Enter the links.
+	link.enter().insert("path", "g")
+		.attr("class", "link")
+		.attr("d", diagonal);
 }
 
 
