@@ -1,5 +1,16 @@
+CREATE TABLE SERVERTABLE1 (
+	FirstName NVARCHAR(100),
+	LastName NVARCHAR(100),
+	Gender NVARCHAR(15),
+	Age INT,
+	Address NVARCHAR(100),
+	City NVARCHAR(100),
+	ZipCode BIGINT
+);
+
+
 -- This is a test comment
-select
+SELECT
 	T1.Field1,
 	T1.Field2,
 	T1.Field3,
@@ -8,7 +19,7 @@ select
 	T1.Field6,
 	T1.Field7
 INTO ##Table1
-FROM Server1.dbo.SererTable1 AS T1;
+FROM SERVERTABLE1 AS T1;
 
 -- This is a test comment
 SELECT
@@ -99,16 +110,3 @@ SELECT
 	'Hello World' AS RandomField
 INTO ##Table5
 FROM ##Table4 AS T1;
-
-
-
-
-CREATE TABLE ##TestTable1 (
-	FirstName NVARCHAR(100),
-	LastName NVARCHAR(100),
-	Gender NVARCHAR(15),
-	Age INT,
-	Address NVARCHAR(100),
-	City NVARCHAR(100),
-	ZipCode BIGINT
-)
