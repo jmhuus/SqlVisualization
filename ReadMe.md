@@ -1,6 +1,6 @@
 SQL Visualization
 =====================
-Enable backend developers by providing a hierarchical representation of SQL scripts. Visualizating query dependencies means faster development, better documentation, and maintainability.
+Enable backend developers by providing a hierarchical representation of SQL scripts. Visualizing query dependencies means faster development, better documentation, and maintainability.
 
 Java
 	- Parse SQL
