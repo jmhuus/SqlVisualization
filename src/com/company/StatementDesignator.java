@@ -97,7 +97,7 @@ public class StatementDesignator implements StatementVisitor {
             tmpNode.setNodeType("TABLE");
             tmpNode.setNodeName(table.getName());
             tmpNode.addParent(diagramNode);
-            diagramNodeManager.addStatementToDiagram(tmpNode);
+            diagramNodeManager.addDiagramNode(tmpNode);
         }else{
             tmpNode = diagramNodeManager.getDiagramNode(table.getName());
             tmpNode.addParent(diagramNode);
@@ -153,7 +153,7 @@ public class StatementDesignator implements StatementVisitor {
         diagramNode.setNodeName(diagramNodeManager.getNewDiagramNodeQueryName("SELECT"));
 
         // Add new diagramNode to DiagramNodeManager
-        diagramNodeManager.addStatementToDiagram(diagramNode);
+        diagramNodeManager.addDiagramNode(diagramNode);
 
         // Set parent (FROM tables) nodes
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
@@ -167,14 +167,14 @@ public class StatementDesignator implements StatementVisitor {
                 tmpNode.setNodeType("TABLE");
                 tmpNode.setNodeName(fromTableName);
                 tmpNode.addChildNode(diagramNode);
-                diagramNodeManager.addStatementToDiagram(tmpNode);
+                diagramNodeManager.addDiagramNode(tmpNode);
             }else{
                 tmpNode = diagramNodeManager.getDiagramNode(fromTableName);
                 tmpNode.addChildNode(diagramNode);
             }
 
 
-            // Add parent object
+            // Add parent object; FROM table
             diagramNode.addParent(tmpNode);
         }
 
