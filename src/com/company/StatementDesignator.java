@@ -97,10 +97,20 @@ public class StatementDesignator implements StatementVisitor {
             tmpNode.setNodeType("TABLE");
             tmpNode.setNodeName(table.getName());
             tmpNode.addParent(diagramNode);
+
+            // Add child
+            diagramNode.addChildNode(tmpNode);
+
+            // Child to add parent
             diagramNodeManager.addDiagramNode(tmpNode);
         }else{
+
+            // Child to add parent
             tmpNode = diagramNodeManager.getDiagramNode(table.getName());
             tmpNode.addParent(diagramNode);
+
+            // Add child
+            diagramNode.addChildNode(tmpNode);
         }
     }
 
