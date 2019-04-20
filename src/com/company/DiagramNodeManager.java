@@ -1,23 +1,18 @@
 package com.company;
 
-import net.sf.jsqlparser.JSQLParserException;
-import net.sf.jsqlparser.parser.CCJSqlParserManager;
-import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
 
-import java.io.StringReader;
-import java.util.HashMap;
-
-import net.sf.jsqlparser.parser.ParseException;
+import java.util.*;
 
 
 class DiagramNodeManager {
 
     private HashMap<String, DiagramNode> diagramNodes;
-    private static int[] nodeIds = {};
+    private static Deque<Integer> nodeIds;
 
     DiagramNodeManager() {
         diagramNodes = new HashMap<>();
+        nodeIds = new LinkedList<>();
     }
 
 
@@ -97,12 +92,9 @@ class DiagramNodeManager {
      * @return incremented and stored nodeId
      */
     public static int getNextAvailableNodeId(){
-        if(nodeIds.length == 0){
-            return 0;
-        }else {
-            nodeIds[nodeIds.length] = nodeIds[nodeIds.length] + 1;
-            return nodeIds[nodeIds.length];
-        }
+        int newId = nodeIds.peekLast() == null ? 1 : nodeIds.peekLast()+1;
+        nodeIds.add(newId);
+        return newId;
     }
 }
 

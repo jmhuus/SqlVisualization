@@ -34,7 +34,7 @@ public class JsonConstructor {
                     .put("id", node.getId())
                     .put("parents", node.getParentNodeIds());
 
-            jsonData = jsonObject + ",\n";
+            jsonData += jsonObject + ",\n";
         }
 
         return jsonData;

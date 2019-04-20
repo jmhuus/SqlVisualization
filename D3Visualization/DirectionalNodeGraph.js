@@ -76,7 +76,7 @@ class DirectionalNodeGraph{
             // Only sum parent nodes that are immediately related
             // If there are multiple paths to a parent, then don't sum
             if (this.getPathsCountBetweenTwoNodes(node, this.getNodeById(node.parents[x])) === 1) {
-                nodeBlockWidth += this.getNodeblockWidth(node.parents[x]);
+                nodeBlockWidth += this.getNodeBlockWidth(this.getNodeById(node.parents[x]));
             }
         }
         node.visited = true;
