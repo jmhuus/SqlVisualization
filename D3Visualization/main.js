@@ -3,7 +3,7 @@ var diagramNodes = directionalNodeGraph.getDirectionalNodeGraph();
 
 
 // set the dimensions and margins of the diagram
-var margin = {top: 40, right: 90, bottom: 50, left: 90},
+var margin = {top: 50, right: 90, bottom: 50, left: 90},
     width = 660 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -44,6 +44,7 @@ var node = svg.selectAll(".node")
 node.append("text")
     .attr("dy", ".35em")
     .attr("y", "-20")
+    .attr("transform", "rotate(-20)")
     .style("text-anchor", "middle")
     .text(function(d) { return d.name; });
 
