@@ -4,6 +4,8 @@ package com.company;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class JsonConstructor {
     private static String PARENT_JSON_ATTRIBUTE = "children";
@@ -17,27 +19,25 @@ public class JsonConstructor {
 
     public String getJsonDiagram(){
 
-        JSONObject jsonData = new JSONObject();
-
+        JSONObject jsonObject = new JSONObject();
+        DiagramNode node;
+        ArrayList<JSONObject> nodes = new ArrayList<>();
+        String jsonData = "";
+        int id = 0;
 
         // Nodes without parents begin recursive statement
         for(String nodeName: diagramNodeManager.getDiagramNodes().keySet()){
-            if(diagramNodeManager.getDiagramNode(nodeName).getParentNodes().size()==0){
+            node = diagramNodeManager.getDiagramNode(nodeName);
+            jsonObject = new JSONObject();
 
-                // Ensure parent exists
-                if(diagramNodeManager.getDiagramNode(nodeName).getParentNodes().iterator().hasNext()){
-                    jsonData.put("name", nodeName)
-                            .put(CHILD_JSON_ATTRIBUTE, diagramNodeManager.getDiagramNode(nodeName).getParentNodes().iterator().next().getNodeName())
-                            .put(PARENT_JSON_ATTRIBUTE, getChildJsonDataArray(diagramNodeManager, nodeName));
-                }else{
-                    jsonData.put("name", nodeName)
-                            .put(CHILD_JSON_ATTRIBUTE, "null")
-                            .put(PARENT_JSON_ATTRIBUTE, getChildJsonDataArray(diagramNodeManager, nodeName));
-                }
-            }
+            jsonObject.put("name", nodeName)
+                    .put("id", node.getId())
+                    .put("parents", node.getParentNodeIds());
+
+            jsonData = jsonObject + ",\n";
         }
 
-        return jsonData.toString();
+        return jsonData;
     }
 
 

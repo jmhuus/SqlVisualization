@@ -14,6 +14,7 @@ import net.sf.jsqlparser.parser.ParseException;
 class DiagramNodeManager {
 
     private HashMap<String, DiagramNode> diagramNodes;
+    private static int[] nodeIds = {};
 
     DiagramNodeManager() {
         diagramNodes = new HashMap<>();
@@ -89,6 +90,19 @@ class DiagramNodeManager {
      */
     HashMap<String, DiagramNode> getDiagramNodes(){
         return diagramNodes;
+    }
+
+    /**
+     * Provides new node IDs
+     * @return incremented and stored nodeId
+     */
+    public static int getNextAvailableNodeId(){
+        if(nodeIds.length == 0){
+            return 0;
+        }else {
+            nodeIds[nodeIds.length] = nodeIds[nodeIds.length] + 1;
+            return nodeIds[nodeIds.length];
+        }
     }
 }
 

@@ -14,11 +14,13 @@ public class DiagramNode {
     private String nodeType;
     private List<DiagramNode> parentNodes;
     private List<DiagramNode> childNodes;
+    private int id;
 
 
     DiagramNode() {
         this.parentNodes = new ArrayList<>();
         this.childNodes = new ArrayList<>();
+        this.id = DiagramNodeManager.getNextAvailableNodeId();
     }
 
     void setNodeName(String nodeName) {
@@ -51,5 +53,19 @@ public class DiagramNode {
 
     void addChildNode(DiagramNode childNodeName) {
         childNodes.add(childNodeName);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int[] getParentNodeIds(){
+        int[] parentIds = new int[parentNodes.size()];
+        int i = 0;
+        for(DiagramNode parent : parentNodes){
+            parentIds[i] = parent.getId();
+        }
+
+        return parentIds;
     }
 }

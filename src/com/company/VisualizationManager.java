@@ -30,7 +30,7 @@ public class VisualizationManager {
         try {
             // Write JSON to Javascript file
             File newFile = new File(JSON_DATA_PATH);
-            FileUtils.write(newFile, "var dataArray = [" + jsonData + "];", "UTF-8");
+            FileUtils.write(newFile, "var treeData = [" + jsonData + "];", "UTF-8");
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
