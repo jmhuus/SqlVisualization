@@ -205,7 +205,7 @@ class DirectionalNodeGraph{
 
                 // Calculate parent leaf node available width
                 var availableParentLeafNodeWidth = this.pixelWidth * (parentLeafNodeCount / maxNodeWidth);
-                var startingLeafNodeX = (this.pixelWidth * (this.nodes[i].blockWidth / maxNodeWidth)) - (availableParentLeafNodeWidth / 2)
+                var startingLeafNodeX = (this.pixelWidth * (this.nodes[i].blockWidth / maxNodeWidth)) - (availableParentLeafNodeWidth / 3)
                 var allocatedSpacePerParentLeafNode = availableParentLeafNodeWidth / parentLeafNodeCount;
 
 
