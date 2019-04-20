@@ -1,3 +1,10 @@
+CREATE TABLE SERVERTABLE1 (
+    FirstName DATETIME,
+    LastName DATETIME,
+    NickName DATETIME,
+);
+
+
 -- This is a test comment
 SELECT
 	T1.Field1,
