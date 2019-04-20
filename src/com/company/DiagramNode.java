@@ -61,9 +61,8 @@ public class DiagramNode {
 
     public int[] getParentNodeIds(){
         int[] parentIds = new int[parentNodes.size()];
-        int i = 0;
-        for(DiagramNode parent : parentNodes){
-            parentIds[i] = parent.getId();
+        for (int i = 0; i < parentNodes.size(); i++) {
+            parentIds[i] = parentNodes.get(i).getId();
         }
 
         return parentIds;
