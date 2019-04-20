@@ -1,7 +1,11 @@
 CREATE TABLE SERVERTABLE1 (
-    FirstName DATETIME,
-    LastName DATETIME,
-    NickName DATETIME,
+	FirstName NVARCHAR(100),
+	LastName NVARCHAR(100),
+	Gender NVARCHAR(15),
+	Age INT,
+	Address NVARCHAR(100),
+	City NVARCHAR(100),
+	ZipCode BIGINT
 );
 
 
