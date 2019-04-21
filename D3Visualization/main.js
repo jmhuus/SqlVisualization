@@ -2,6 +2,10 @@ let directionalNodeGraph = new DirectionalNodeGraph(treeData, 700, 75  );
 var diagramNodes = directionalNodeGraph.getDirectionalNodeGraph();
 
 
+diagramNodes.forEach(function(node){
+    console.log(node.id, node.x, node.y);
+});
+
 // set the dimensions and margins of the diagram
 var margin = {top: 50, right: 90, bottom: 50, left: 90},
     width = 660 - margin.left - margin.right,

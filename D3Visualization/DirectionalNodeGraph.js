@@ -14,9 +14,6 @@ class DirectionalNodeGraph{
         this.setNodeLayers();
         this.remapNodeLayersToBePositive();
         this.setNodeCoordinates();
-        this.nodes.forEach(function(node){
-            console.log(node);
-        });
 
         return this.nodes;
     }
@@ -184,14 +181,13 @@ class DirectionalNodeGraph{
         for (var i = 0; i < this.nodes.length; i++) {
             if (this.nodes[i].blockWidth > maxNodeWidth) {
                 maxNodeWidth = this.nodes[i].blockWidth;
-                   }
+            }
         }
 
-        var leafCountsPerNode = {};
         for (var i = 0; i < this.nodes.length; i++) {
 
             // X coordinates for non-leaf nodes
-            if (this.nodes[i].blockWidth > 1) {
+            if (this.nodes[i].parents.length >= 1) {
                 this.nodes[i].x = this.pixelWidth * (this.nodes[i].blockWidth / maxNodeWidth);
 
 
