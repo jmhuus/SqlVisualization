@@ -9,6 +9,26 @@ CREATE TABLE SERVERTABLE1 (
 );
 
 
+CREATE TABLE SERVERTABLE3 (
+	FirstName NVARCHAR(100),
+	LastName NVARCHAR(100),
+	Gender NVARCHAR(15),
+	Age INT,
+	Address NVARCHAR(100),
+	City NVARCHAR(100),
+	ZipCode BIGINT
+);
+
+CREATE TABLE SERVERTABLE7 (
+	FirstName NVARCHAR(100),
+	LastName NVARCHAR(100),
+	Gender NVARCHAR(15),
+	Age INT,
+	Address NVARCHAR(100),
+	City NVARCHAR(100),
+	ZipCode BIGINT
+);
+
 -- This is a test comment
 SELECT
 	T1.Field1,
