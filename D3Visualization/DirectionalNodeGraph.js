@@ -177,6 +177,12 @@ class DirectionalNodeGraph{
 
     // Uses node blockWidths to position node x,y coordinates
     setNodeCoordinates(){
+        // Reset visited flag
+        this.nodes.forEach(function(node){
+            node.visited = false;
+        });
+
+        // Retrieve the largest possible node blockWidth
         var maxNodeWidth = 0;
         for (var i = 0; i < this.nodes.length; i++) {
             if (this.nodes[i].blockWidth > maxNodeWidth) {
@@ -184,12 +190,12 @@ class DirectionalNodeGraph{
             }
         }
 
+        // Set X coordinate for each node
         for (var i = 0; i < this.nodes.length; i++) {
-
             // X coordinates for non-leaf nodes
-            if (this.nodes[i].parents.length >= 1) {
+            if (this.nodes[i].parents.length >= 1 && !this.nodes[i].visited) {
                 this.nodes[i].x = this.pixelWidth * (this.nodes[i].blockWidth / maxNodeWidth);
-
+                this.nodes[i].visited = true;
 
                 // Count parent leaf nodes
                 var parentLeafNodeCount = 0;
@@ -204,11 +210,20 @@ class DirectionalNodeGraph{
                 var startingLeafNodeX = (this.pixelWidth * (this.nodes[i].blockWidth / maxNodeWidth)) - (availableParentLeafNodeWidth / 3)
                 var allocatedSpacePerParentLeafNode = availableParentLeafNodeWidth / parentLeafNodeCount;
 
-
                 // X coordinate for leaf nodes
                 for (var x = 0; x < this.nodes[i].parents.length; x++) {
                     if (this.getNodeById(this.nodes[i].parents[x]).blockWidth === 1) {
                         this.getNodeById(this.nodes[i].parents[x]).x = startingLeafNodeX;
+                        this.getNodeById(this.nodes[i].parents[x]).visited = true;
+
+
+                        // Single parent leaf nodes should be drawn
+                        // TODO: not ideal aglorithm, need to brainstorm high-level approach to visualizing single node hierarchies
+                        if (this.getNodeById(this.nodes[i].parents[x]).parents.length === 1) {
+                            this.getNodeById(this.getNodeById(this.nodes[i].parents[x]).parents[0]).x = startingLeafNodeX;
+                            this.getNodeById(this.getNodeById(this.nodes[i].parents[x]).parents[0]).visited = true;
+                        }
+
                         startingLeafNodeX += allocatedSpacePerParentLeafNode;
                     }
                 }
