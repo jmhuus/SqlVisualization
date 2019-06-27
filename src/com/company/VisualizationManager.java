@@ -3,6 +3,9 @@ package com.company;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class VisualizationManager {
 
@@ -57,15 +60,43 @@ public class VisualizationManager {
     // TODO: Migrate to front-end framework
     // Open D3 visualization tree in browser (Chrome)
     private static void openVisualizationBrowser(){
-        try {
-            File visualizationHtml = new File(System.getProperty("user.dir")+HTML_INDEX_PATH);
-            Process p = new ProcessBuilder("cmd", "/c", "start", "chrome", visualizationHtml.getPath()).start();
-            int exitCode = p.waitFor();
-            System.out.println(exitCode == 0 ? "Visualization Successful" : "Visualization Failed; exit code: " + exitCode);
-        } catch(InterruptedException ie){
-            ie.printStackTrace();
-        } catch (IOException ioe){
-            ioe.printStackTrace();
+
+        String osName = System.getProperty("os.name");
+
+        switch (osName){
+            case "Mac OS X":
+                    try {
+
+                        // TODO: migrate to reference source directory as base
+                        File visualizationHtml = new File(System.getProperty("user.dir")+HTML_INDEX_PATH);
+                        List<String> commands = new ArrayList<>();
+                        commands.add("open");
+                        commands.add("~/Documents/Repos/SqlVisualization/D3Visualization/index.html");
+                        ProcessBuilder p = new ProcessBuilder(commands);
+                        p.start();
+
+
+
+//                        int exitCode = p.waitFor();
+//                        System.out.println(exitCode == 0 ? "Visualization Successful" : "Visualization Failed; exit code: " + exitCode);
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }
+                break;
+
+            default:
+                try {
+                    File visualizationHtml = new File(System.getProperty("user.dir")+HTML_INDEX_PATH);
+                    Process p = new ProcessBuilder("cmd", "/c", "start", "chrome", visualizationHtml.getPath()).start();
+                    int exitCode = p.waitFor();
+                    System.out.println(exitCode == 0 ? "Visualization Successful" : "Visualization Failed; exit code: " + exitCode);
+                } catch(InterruptedException ie){
+                    ie.printStackTrace();
+                } catch (IOException ioe){
+                    ioe.printStackTrace();
+                }
         }
+
+
     }
 }
