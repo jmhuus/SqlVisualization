@@ -47,6 +47,7 @@ public class Main {
             Statements statements = CCJSqlParserUtil.parseStatements(sqlScript);
             List<Statement> statementList = statements.getStatements();
 
+            int statementsCount = statementList.size();
 
             // References to all DiagramNodes
             for (Statement statement : statementList) {

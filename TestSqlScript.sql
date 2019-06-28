@@ -1,68 +1,20 @@
-CREATE TABLE SERVERTABLE1 (
-	FirstName NVARCHAR(100),
-	LastName NVARCHAR(100),
-	Gender NVARCHAR(15),
-	Age INT,
-	Address NVARCHAR(100),
-	City NVARCHAR(100),
-	ZipCode BIGINT
-);
-
-
-CREATE TABLE SERVERTABLE3 (
-	FirstName NVARCHAR(100),
-	LastName NVARCHAR(100),
-	Gender NVARCHAR(15),
-	Age INT,
-	Address NVARCHAR(100),
-	City NVARCHAR(100),
-	ZipCode BIGINT
-);
-
-CREATE TABLE SERVERTABLE7 (
-	FirstName NVARCHAR(100),
-	LastName NVARCHAR(100),
-	Gender NVARCHAR(15),
-	Age INT,
-	Address NVARCHAR(100),
-	City NVARCHAR(100),
-	ZipCode BIGINT
-);
-
--- This is a test comment
 SELECT
-	T1.Field1,
-	T1.Field2,
-	T1.Field3,
-	T1.Field4,
-	T1.Field5,
-	T1.Field6,
-	T1.Field7
-INTO ##Table1
-FROM SERVERTABLE1 AS T1
-JOIN SERVERTABLE2 AS T2
-	ON T1.ID = T2.ID
-JOIN SERVERTABLE3 AS T3
-	ON T2.ID = T3.ID;
-
-
-
-
-SELECT
-	T1.Field1,
-	T1.Field2,
-	T1.Field3,
-	T1.Field4,
-	T1.Field5,
-	T1.Field6,
-	T1.Field7
-INTO ##Table2
-FROM ##Table1 AS T1
-JOIN SERVERTABLE5 AS T2
-	ON T1.ID = T2.ID
-JOIN SERVERTABLE6 AS T3
-	ON T2.ID = T3.ID
-JOIN SERVERTABLE7 AS T3
-	ON T2.ID = T3.ID
-JOIN SERVERTABLE8 AS T3
-	ON T2.ID = T3.ID;
+    T1.FirstName,
+    T1.LastName,
+    T1.Age,
+    T2.Street,
+    T2.City,
+    T2.Zip,
+    T2.State,
+    T3.FamilySize
+FROM Prospects AS T1
+JOIN Addresses AS T2
+    ON T1.ID = T2.ID
+JOIN (
+    SELECT
+        LastName,
+        COUNT(ID) AS FamilySize
+    FROM Prospects
+    GROUP BY LastName
+) AS T3
+    ON T1.LastName = T3.LastName;
