@@ -21,25 +21,29 @@ public class SelectDesignator implements SelectVisitor {
 
     @Override
     public void visit(PlainSelect plainSelect) {
-        // Child nodes (INTO tables)
-        List<Table> selectItems = plainSelect.getIntoTables();
-        DiagramNode tmpNode;
-        for (Table intoTable: selectItems){
+        try {
+            // Child nodes (INTO tables)
+            List<Table> selectItems = plainSelect.getIntoTables();
+            DiagramNode tmpNode;
+            for (Table intoTable : selectItems) {
 
-            // Node doesn't exist; init before adding child object
-            if(! diagramNodeManager.nodeExists(intoTable.getName())){
-                tmpNode = new DiagramNode();
-                tmpNode.setNodeType("TABLE");
-                tmpNode.setNodeName(intoTable.getName());
-                tmpNode.addParent(diagramNode);
-                diagramNodeManager.addDiagramNode(tmpNode);
-            }else{
-                tmpNode = diagramNodeManager.getDiagramNode(intoTable.getName());
-                tmpNode.addParent(diagramNode);
+                // Node doesn't exist; init before adding child object
+                if (!diagramNodeManager.nodeExists(intoTable.getName())) {
+                    tmpNode = new DiagramNode();
+                    tmpNode.setNodeType("TABLE");
+                    tmpNode.setNodeName(intoTable.getName());
+                    tmpNode.addParent(diagramNode);
+                    diagramNodeManager.addDiagramNode(tmpNode);
+                } else {
+                    tmpNode = diagramNodeManager.getDiagramNode(intoTable.getName());
+                    tmpNode.addParent(diagramNode);
+                }
+
+                // Add child object
+                diagramNode.addChildNode(tmpNode);
             }
-
-            // Add child object
-            diagramNode.addChildNode(tmpNode);
+        }catch (NullPointerException npe){
+            return;
         }
     }
 
