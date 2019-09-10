@@ -69,15 +69,20 @@ public class StatementDesignator implements StatementVisitor {
         diagramNode.setNodeType("DROP");
         diagramNode.setNodeName(diagramNodeManager.getNewDiagramNodeQueryName("DROP"));
 
+        // Add child node; table to be dropped
+        Table droppedTable = drop.getName();
+        DiagramNode droppedTargetNode = new DiagramNode();
+        droppedTargetNode.setNodeType("TABLE");
+        droppedTargetNode.setNodeName(droppedTable.getName());
+        droppedTargetNode.addParent(diagramNode);
+        diagramNode.addChildNode(droppedTargetNode);
+        diagramNodeManager.addDiagramNode(droppedTargetNode);
+
         // Add DROP node to diagram
         diagramNodeManager.addDiagramNode(diagramNode);
 
         // Ensure that dropped table exists in diagram
-        Table droppedTable = drop.getName();
         if(!diagramNodeManager.nodeExists(droppedTable.getName())){
-            DiagramNode droppedTargetNode = new DiagramNode();
-            droppedTargetNode.setNodeType("TABLE");
-            droppedTargetNode.setNodeName(droppedTable.getName());
             diagramNodeManager.addDiagramNode(diagramNode);
         }
     }
