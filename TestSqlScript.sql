@@ -11,4 +11,4 @@ JOIN Addresses AS T2
     ON T1.ID = T2.ID;
 
 
-DROP TABLE NewTable;
+DROP TABLE Prospects;
