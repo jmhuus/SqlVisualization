@@ -207,7 +207,6 @@ public class StatementDesignator implements StatementVisitor {
             diagramNode.addParent(tmpNode);
         }
 
-
         // Retrieve INTO tables
         SelectBody selectBody = select.getSelectBody();
         selectBody.accept(new SelectDesignator(diagramNode, diagramNodeManager));

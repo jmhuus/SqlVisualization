@@ -36,7 +36,7 @@ public class Main {
             File file = new File("./TestSqlScript.sql");
             List<String> lines = FileUtils.readLines(file, "UTF-8");
 
-            // One string
+            // Entire file in one string
             StringBuilder stringBuilder = new StringBuilder();
             for(String line: lines){
                 stringBuilder.append(line + "\n");

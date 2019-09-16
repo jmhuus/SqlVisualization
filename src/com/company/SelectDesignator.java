@@ -19,6 +19,12 @@ public class SelectDesignator implements SelectVisitor {
         this.diagramNodeManager = diagramNodeManager;
     }
 
+
+    /**
+     * Only used to retrieve items from the 'select body' such as 'INTO' tables.
+     * 'FROM' tables are retrieved in the calling class, StatementDesignator.
+     * @param plainSelect
+     */
     @Override
     public void visit(PlainSelect plainSelect) {
         try {

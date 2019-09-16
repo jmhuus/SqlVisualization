@@ -33,9 +33,9 @@ public class VisualizationManager {
         String dotFileData = "";
         // TODO: refactor to pull DiagramNode object instead of keyset
         for (String currentNodeName : diagramNodeManager.getDiagramNodes().keySet()){
-            // Loop through all children
-            for (DiagramNode childNodeName : diagramNodeManager.getDiagramNode(currentNodeName).getChildNodes()){
-                dotFileData += currentNodeName + " -> " + childNodeName.getNodeName() + ";\n";
+            // Loop through parent nodes
+            for (DiagramNode parenteNodeName : diagramNodeManager.getDiagramNode(currentNodeName).getParentNodes()){
+                dotFileData += "    " + parenteNodeName.getNodeName() + " -> " + currentNodeName + ";\n";
             }
         }
         dotFileData = "digraph G {\n" + dotFileData + "\n}";
