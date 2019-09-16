@@ -17,7 +17,7 @@ public class VisualizationManager {
     private static final String DOT_DATA_PATH = "D3Visualization/tmp/";
     private static final String DOT_DATA_FILE_NAME = "input.dot";
     private static final String VIZ_OUTPUT_PATH = "D3Visualization/tmp/";
-    private static final String VIZ_OUTPUT_FILE_NAME = "output.png";
+    private static final String VIZ_OUTPUT_FILE_NAME = "output.svg";
     private static final String HTML_INDEX_PATH = "\\D3Visualization\\index.html";
     private static final String ERROR_MESSAGE_DATA_PATH = "D3Visualization/tmp/errorMessage.js";
 
@@ -50,7 +50,7 @@ public class VisualizationManager {
 
             // Open execute Graphviz cmd
             ProcessBuilder builder = new ProcessBuilder(
-                    "dot", "-Tpng", DOT_DATA_PATH + DOT_DATA_FILE_NAME, "-o", VIZ_OUTPUT_PATH + VIZ_OUTPUT_FILE_NAME);
+                    "dot", "-Tsvg", DOT_DATA_PATH + DOT_DATA_FILE_NAME, "-o", VIZ_OUTPUT_PATH + VIZ_OUTPUT_FILE_NAME);
             builder.redirectErrorStream(true);
             Process p = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -64,6 +64,7 @@ public class VisualizationManager {
             }
 
             // Open Graphviz result
+
 
 
         } catch (IOException ioe) {
