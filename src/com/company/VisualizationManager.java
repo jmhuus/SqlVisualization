@@ -2,14 +2,11 @@ package com.company;
 
 import org.apache.commons.io.FileUtils;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class VisualizationManager {
 
@@ -39,8 +36,6 @@ public class VisualizationManager {
             }
         }
         dotFileData = "digraph G {\n" + dotFileData + "\n}";
-        System.out.println(dotFileData);
-
 
         try {
             // Create dot file
@@ -60,55 +55,13 @@ public class VisualizationManager {
                 if (line == null) {
                     break;
                 }
-                System.out.println(line);
             }
 
             // Open Graphviz result
 
 
-
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        }
-
-
-        // TODO: convert back to using browser; full-featured site?
-//        JsonConstructor jsonConstructor = new JsonConstructor(diagramNodeManager);
-//        String json = jsonConstructor.getJsonDiagram();
-//        setJsonDataArray(json);
-//        setErrorMessage(errorMessage);
-//        openVisualizationBrowser();
-    }
-
-
-    // TODO: specify SQL source and line number location of syntax error
-    // Export error message to errorMessage.js
-    private static void setErrorMessage(String errorMessage){
-        // Write message to errorMessage.js
-        try {
-            if(errorMessage == null || errorMessage.equals("")){
-                File newFile = new File(ERROR_MESSAGE_DATA_PATH);
-                FileUtils.write(newFile, "var errorMessage = [''];", "UTF-8");
-            }else{
-                File newFile = new File(ERROR_MESSAGE_DATA_PATH);
-                errorMessage = errorMessage.replace("\n", "', '");
-                FileUtils.write(newFile, "var errorMessage = ['Woops! SQL syntax error:', '', '"+errorMessage+"'];", "UTF-8");
-            }
-        } catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-    }
-
-    // TODO: Migrate to front-end framework
-    // Open D3 visualization tree in browser (Chrome)
-    private static void openVisualizationBrowser(){
-        try {
-            // Open visualization in default browser
-            String url = "D3Visualization/index.html";
-            File htmlFile = new File(url);
-            Desktop.getDesktop().browse(htmlFile.toURI());
-        } catch(Exception e){
-            e.printStackTrace();
         }
     }
 }
