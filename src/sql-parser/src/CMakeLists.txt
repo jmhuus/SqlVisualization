@@ -1,0 +1,1 @@
+add_library(sql_parser SQLParser.cpp SQLParserResult.cpp util/sqlhelper.cpp sql/Expr.cpp sql/PrepareStatement.cpp sql/SQLStatement.cpp sql/statements.cpp parser/bison_parser.cpp parser/conflict_test.cpp parser/flex_lexer.cpp)
