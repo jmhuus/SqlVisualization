@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <exception>
 #include "node.fwd.h"
 #include "sql/SQLStatement.h"
 #include "sql/SelectStatement.h"
@@ -21,10 +22,22 @@ class NodeManager {
   std::vector<Node*> _nodes;
  public:
   void add_node(Node* node);
+  Node* get_node(const std::string& node_name);
   bool node_exists(const std::string& name);
   void set_node_name(Node* const node);
   std::vector<Node*> get_nodes();
   void print_all_nodes_info();
+};
+
+/**
+ * NodeManagerError class represents errors that occur when using
+ * NodeManager class.
+ */
+class NodeManagerError: std::exception {
+  const char* msg;
+public:
+  NodeManagerError(const char* s) noexcept(true) : msg(s) { }
+  const char* what() const noexcept(true) { return msg; };
 };
 
 #endif // NODE_MANAGER_H

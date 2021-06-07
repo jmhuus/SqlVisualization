@@ -7,12 +7,14 @@
 #include <iostream>
 #include "sql/SQLStatement.h"
 #include "sql/SelectStatement.h"
+#include "sql/InsertStatement.h"
 #include "node_manager.fwd.h"
 
 using hsql::SQLStatement;
 using hsql::SelectStatement;
 using hsql::StatementType;
 using hsql::TableRef;
+using hsql::InsertStatement;
 
 /**
  * Node class represents a SQL statement.
@@ -36,7 +38,7 @@ public:
   // Generates parent/child nodes from a SQL statement
   // Parent nodes - source data. Either tables or other nested queries
   // Child nodes - resulting data source.
-  Node(const std::string& name, NodeManager* node_manager);
+  Node(const SQLStatement* stmt, NodeManager* node_manager, const std::string& name);
   Node(const SQLStatement* stmt, NodeManager* node_manager);
   void add_parent_node(Node* node);
   void add_child_node(Node* node);
@@ -51,8 +53,8 @@ public:
   void init_parent_nodes(const SQLStatement* stmt);
   void init_child_nodes(const SQLStatement* stmt);
 
-  // SELECT-specific
-  void get_select_from_table(TableRef* from_table);
+  // Statement-specific handlers
+  void search_select_from_table(const SelectStatement* stmt);
 };
 
 #endif // NODE_H

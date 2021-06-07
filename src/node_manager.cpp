@@ -16,6 +16,18 @@ bool NodeManager::node_exists(const std::string& name) {
   return false;
 }
 
+Node* NodeManager::get_node(const std::string& node_name) {
+  for (auto node_it = _nodes.begin(); node_it != _nodes.end(); ++node_it) {
+    if ((*node_it)->get_name() == node_name) {
+      return *node_it;
+    }
+  }
+
+  throw NodeManagerError(std::string(
+    "NodeManager::get_node() cannot find node with name '" +
+    node_name + "'.").c_str());
+}
+
 void NodeManager::set_node_name(Node* node) {
   int count = 0;
   for (auto it = _nodes.begin(); it != _nodes.end(); ++it) {
@@ -26,7 +38,8 @@ void NodeManager::set_node_name(Node* node) {
 
   // Set readable name
   std::string type_string;
-  for (auto it = Node::type_name_mapping.begin(); it != Node::type_name_mapping.end(); ++it) {
+  for (auto it = Node::type_name_mapping.begin();
+       it != Node::type_name_mapping.end(); ++it) {
     if (node->stmt->type() == it->first) {
       type_string = it->second;
     }

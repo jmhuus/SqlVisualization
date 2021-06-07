@@ -13,8 +13,8 @@
 
 int main() {
   // // fromTable->getName()
-  std::string query =
-    "SELECT name, age, gender, sex, address, phone FROM test";
+  // std::string query =
+  //   "SELECT name, age, gender, sex, address, phone FROM test";
   
   // fromTable->join
   // std::string query =
@@ -32,9 +32,17 @@ int main() {
   // Multiple statements
   // std::string query = "SELECT name, age, gender, sex, address, phone FROM test, test_2; SELECT name, age, gender, sex, address, phone FROM test, test_2;";
 
+  // Insert Statement
+  std::string query = "INSERT INTO test (column_1, column_2) VALUES (1, 2);";
+
+  query += " SELECT * FROM test;";
+
   // Parse SQL
   hsql::SQLParserResult result;
   hsql::SQLParser::parse(query, &result);
+  if (!result.isValid()) {
+    std::cout << "Error when parsing the SQL string: " << result.errorMsg() << "\n";
+  }
 
   // Begin constructing forest graph of nodes/statements
   NodeManager* node_manager = new NodeManager();

@@ -1,6 +1,10 @@
 #include <vector>
 #include "node.h"
 #include "node_manager.h"
+#include "sql/SQLStatement.h"
+#include "sql/SelectStatement.h"
+#include "sql/Table.h"
+#include "sql/InsertStatement.h"
 #include <iostream>
 
 
@@ -8,6 +12,8 @@ using hsql::SQLStatement;
 using hsql::SelectStatement;
 using hsql::StatementType;
 using hsql::TableRef;
+using hsql::InsertStatement;
+
 const std::map<enum StatementType, std::string>
 Node::type_name_mapping = {
 			   { hsql::kStmtSelect, "Select" },
@@ -26,7 +32,9 @@ Node::type_name_mapping = {
 			   { hsql::kStmtTransaction, "Transaction" }
 };
 
-Node::Node(const std::string& name, NodeManager* node_manager) {
+Node::Node(const SQLStatement* statement, NodeManager* node_manager,
+	   const std::string& name) {
+  stmt = statement;
   _name = name;
   _node_manager = node_manager;
 }
@@ -70,23 +78,31 @@ StatementType Node::get_type() {
   return stmt->type();
 }
 
-void Node::get_select_from_table(TableRef* from_table) {
+void Node::search_select_from_table(const SelectStatement* stmt) {
+  TableRef* from_table = stmt->fromTable;
+  
   // Determine how the from table syntax
   switch (from_table->type) {
-    
   case hsql::kTableName: {
+    Node* new_parent_node;
     if (!_node_manager->node_exists(from_table->getName())) {
-      Node* new_parent_node = new Node(from_table->getName(), _node_manager);
-      new_parent_node->add_child_node(this);
-      add_parent_node(new_parent_node);
-      _node_manager->add_node(new_parent_node);
+       new_parent_node = new Node(stmt, _node_manager, from_table->getName());
+       _node_manager->add_node(new_parent_node);
+    } else {
+      try {
+	new_parent_node = _node_manager->get_node(from_table->getName());
+      } catch (NodeManagerError nme) {
+	std::cout << "Error: " << nme.what() << "\n";
+      }
     }
+    new_parent_node->add_child_node(this);
+    add_parent_node(new_parent_node);
     break;
   }
     
   case hsql::kTableSelect: {
     // Recursively fetch the from tables from the subquery
-    get_select_from_table(from_table->select->fromTable);
+    search_select_from_table(from_table->select);
     break;
   }
     
@@ -96,39 +112,60 @@ void Node::get_select_from_table(TableRef* from_table) {
     TableRef* right_table = from_table->join->right;
 
     // Add left table
+    Node* new_parent_node = nullptr;
     if (!_node_manager->node_exists(left_table->getName())) {
-      Node* new_parent_node = new Node(left_table->getName(), _node_manager);
-      new_parent_node->add_child_node(this);
-      add_parent_node(new_parent_node);
+      new_parent_node = new Node(stmt, _node_manager, left_table->getName());
       _node_manager->add_node(new_parent_node);
+    } else {
+      try {
+	new_parent_node = _node_manager->get_node(left_table->getName());
+      } catch (NodeManagerError nme) {
+	std::cout << "Error: " << nme.what() << "\n";
+      }
     }
+    new_parent_node->add_child_node(this);
+    add_parent_node(new_parent_node);
 
     // Add right table
     // Joined data source is a select query
     if (right_table->type == hsql::kTableSelect) {
-      get_select_from_table(right_table->select->fromTable);
+      search_select_from_table(right_table->select);
     }
 
     // Joined data source is a table
     if (right_table->type == hsql::kTableName) {
+      Node* new_parent_node = nullptr;
       if (!_node_manager->node_exists(right_table->getName())) {
-	Node* new_parent_node = new Node(right_table->getName(), _node_manager);
-	new_parent_node->add_child_node(this);
-	add_parent_node(new_parent_node);
+	new_parent_node = new Node(stmt, _node_manager, right_table->getName());
 	_node_manager->add_node(new_parent_node);
+      } else {
+	try {
+	  new_parent_node = _node_manager->get_node(right_table->getName());
+	} catch (NodeManagerError nme) {
+	  std::cout << "Error: " << nme.what() << "\n";
+	}
       }
+      new_parent_node->add_child_node(this);
+      add_parent_node(new_parent_node);
     }
     break;
   }
   case hsql::kTableCrossProduct: {
     std::vector<TableRef*> from_tables = *(from_table->list);
     for (auto it = from_tables.begin(); it != from_tables.end(); ++it) {
+      Node* new_parent_node = nullptr;
       if (!_node_manager->node_exists((*it)->getName())) {
-	Node* new_parent_node = new Node((*it)->getName(), _node_manager);
-	new_parent_node->add_child_node(this);
-	add_parent_node(new_parent_node);
+	new_parent_node = new Node(stmt, _node_manager, (*it)->getName());
 	_node_manager->add_node(new_parent_node);
+      } else {
+	try {
+	  new_parent_node = _node_manager->get_node((*it)->getName());
+	} catch (NodeManagerError nme) {
+	  std::cout << "Error: " << nme.what() << "\n";
+	}
       }
+      new_parent_node->add_child_node(this);
+      add_parent_node(new_parent_node);
     }
     break;
   }
@@ -142,8 +179,7 @@ void Node::init_parent_nodes(const SQLStatement* stmt) {
     
   switch (stmt->type()) {
   case hsql::kStmtSelect: {
-    const SelectStatement* select_stmt = (const SelectStatement*) stmt;
-    get_select_from_table(select_stmt->fromTable);
+    search_select_from_table((const SelectStatement*) stmt);
     break;
   }
   case hsql::kStmtInsert:
@@ -167,6 +203,39 @@ void Node::init_parent_nodes(const SQLStatement* stmt) {
 }
 
 void Node::init_child_nodes(const SQLStatement* stmt) {
-  std::cout << "node.cpp Node::get_child_nodes() NOT IMPLEMENTED" << "\n";
+  switch (stmt->type()) {
+  case hsql::kStmtInsert: {
+    const InsertStatement* insert_stmt = (const InsertStatement*) stmt;
+    Node* new_child_node = nullptr;
+    if (!_node_manager->node_exists(insert_stmt->tableName)) {
+      new_child_node = new Node(stmt, _node_manager, insert_stmt->tableName);
+      _node_manager->add_node(new_child_node);
+    } else {
+      new_child_node = _node_manager->get_node(insert_stmt->tableName);
+    }
+    new_child_node->add_parent_node(this);
+    add_child_node(new_child_node);
+    break;
+  }
+  case hsql::kStmtCreate: {
+    std::cout << "kStmtCreate" << "\n";
+    break;
+  }
+  case hsql::kStmtImport: {
+    std::cout << "kStmtImport" << "\n";
+    break;
+  }
+  case hsql::kStmtExport: {
+    std::cout << "kStmtExport" << "\n";
+    break;
+  }
+  case hsql::kStmtTransaction: {
+    std::cout << "kStmtTransaction" << "\n";
+    break;
+  }
+  default: {
+    break;
+  }
+  }
   return;
 }
