@@ -11,31 +11,7 @@
 #include <stdexcept>
 
 
-int main() {
-  // // fromTable->getName()
-  // std::string query =
-  //   "SELECT name, age, gender, sex, address, phone FROM test";
-  
-  // fromTable->join
-  // std::string query =
-  //   "SELECT name, age, gender, sex, address, phone "
-  //   "FROM test LEFT JOIN test_2 ON test.id = test_2.id;";
-
-  // fromTable->list
-  // std::string query =
-  //   "SELECT name, age, gender, sex, address, phone FROM test, test_2;";
-
-  // subquery Select
-  // std::string query =
-  //   "SELECT name, age, gender, sex, address, phone FROM (SELECT * FROM table2) as T1;";
-
-  // Multiple statements
-  // std::string query = "SELECT name, age, gender, sex, address, phone FROM test, test_2; SELECT name, age, gender, sex, address, phone FROM test, test_2;";
-
-  // Insert Statement
-  std::string query = "INSERT INTO test (column_1, column_2) VALUES (1, 2);";
-
-  query += " SELECT * FROM test;";
+int main(int argc, char *argv[]) {
 
   // Parse SQL
   hsql::SQLParserResult result;

@@ -8,5 +8,3 @@ add_executable(${PROJECT_NAME} main.cpp node.cpp node_manager.cpp)
 add_subdirectory(sql-parser/src)
 target_link_libraries(${PROJECT_NAME} sql_parser)
 target_include_directories(${PROJECT_NAME} PRIVATE sql-parser/src)
-
-
