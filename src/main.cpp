@@ -13,6 +13,8 @@
 
 int main(int argc, char *argv[]) {
 
+  std::string query = "SELECT * FROM table1; SELECT * FROM table2";
+
   // Parse SQL
   hsql::SQLParserResult result;
   hsql::SQLParser::parse(query, &result);
@@ -28,6 +30,9 @@ int main(int argc, char *argv[]) {
   }
 
   // Print nodes from NodeManager
-  node_manager->print_all_nodes_info();
+  std::cout << node_manager->get_all_nodes_info();
+  Node* table2 = node_manager->get_node("table2");
+
+  delete node_manager;
   return 0;
 }

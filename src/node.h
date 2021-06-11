@@ -8,12 +8,14 @@
 #include "sql/SQLStatement.h"
 #include "sql/SelectStatement.h"
 #include "sql/InsertStatement.h"
+#include "sql/Table.h"
 #include "node_manager.fwd.h"
 
 using hsql::SQLStatement;
 using hsql::SelectStatement;
 using hsql::StatementType;
 using hsql::TableRef;
+using hsql::TableRefType;
 using hsql::InsertStatement;
 
 /**
@@ -31,6 +33,7 @@ class Node {
 
 public:
   const SQLStatement* stmt;
+  int table_type;
   static const std::map<enum StatementType, std::string> type_name_mapping;
 
   const std::string& get_blah();
@@ -38,8 +41,9 @@ public:
   // Generates parent/child nodes from a SQL statement
   // Parent nodes - source data. Either tables or other nested queries
   // Child nodes - resulting data source.
-  Node(const SQLStatement* stmt, NodeManager* node_manager, const std::string& name);
-  Node(const SQLStatement* stmt, NodeManager* node_manager);
+  Node(const SQLStatement* statement, NodeManager* node_manager, const std::string& name);
+  Node(TableRefType table_ref_type, NodeManager* node_manager, const std::string& name);
+  Node(const SQLStatement* statement, NodeManager* node_manager);
   void add_parent_node(Node* node);
   void add_child_node(Node* node);
   std::vector<Node*> get_parent_nodes();

@@ -27,6 +27,7 @@ class NodeManager {
   void set_node_name(Node* const node);
   std::vector<Node*> get_nodes();
   void print_all_nodes_info();
+  std::string get_all_nodes_info();
 };
 
 /**

@@ -31,10 +31,12 @@ Node* NodeManager::get_node(const std::string& node_name) {
 void NodeManager::set_node_name(Node* node) {
   int count = 0;
   for (auto it = _nodes.begin(); it != _nodes.end(); ++it) {
+    if ((*it)->table_type != -1) continue;  // Node represents a table
     if ((*it)->stmt->type() == node->stmt->type()) {
       count++;
     }
   }
+  if (count > 1) count -= 1;
 
   // Set readable name
   std::string type_string;
@@ -42,6 +44,7 @@ void NodeManager::set_node_name(Node* node) {
        it != Node::type_name_mapping.end(); ++it) {
     if (node->stmt->type() == it->first) {
       type_string = it->second;
+      break;
     }
   }
   
@@ -54,21 +57,28 @@ std::vector<Node*> NodeManager::get_nodes() {
 
 
 void NodeManager::print_all_nodes_info() {
+  std::cout << get_all_nodes_info() << "\n";
+}
+
+
+std::string NodeManager::get_all_nodes_info() {
   // Current Node
-  std::cout << "\n\nNodes in NodeManager:" << "\n";
+  std::string info = "\n\nNodes in NodeManager:\n";
   for (auto node_it = _nodes.begin(); node_it != _nodes.end(); ++node_it) {
-    std::cout << "  Node: " << (*node_it)->get_name() << "\n";
+    info += std::string("  Node: ") + (*node_it)->get_name() + "\n";
 
     // Print parents
     std::vector<Node*> parents = (*node_it)->get_parent_nodes();
     for (auto parent_it = parents.begin(); parent_it != parents.end(); ++parent_it) {
-      std::cout << "    parent: " << (*parent_it)->get_name() << "\n";
+      info += std::string("    parent: ") + (*parent_it)->get_name() + "\n";
     }
 
     // Print children
     std::vector<Node*> children = (*node_it)->get_child_nodes();
     for (auto child_it = children.begin(); child_it != children.end(); ++child_it) {
-      std::cout << "    child: " << (*child_it)->get_name() << "\n";
+      info +=  std::string("    child: ") + (*child_it)->get_name() + "\n";
     }
   }
+
+  return info;
 }

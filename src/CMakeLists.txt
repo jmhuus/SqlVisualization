@@ -1,10 +1,9 @@
-cmake_minimum_required(VERSION 3.16.0)
+file(GLOB_RECURSE SOURCES *.cpp *.h)
 
-project(SqlVisualization)
+add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+target_link_libraries(${CMAKE_PROJECT_NAME} LINK_PUBLIC sql_parser)
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ../lib/sql-parser/src)
 
-add_executable(${PROJECT_NAME} main.cpp node.cpp node_manager.cpp)
-
-# Link library - absolute
-add_subdirectory(sql-parser/src)
-target_link_libraries(${PROJECT_NAME} sql_parser)
-target_include_directories(${PROJECT_NAME} PRIVATE sql-parser/src)
+add_library(${CMAKE_PROJECT_NAME}_testing ${SOURCES})
+target_link_libraries(${CMAKE_PROJECT_NAME}_testing LINK_PUBLIC sql_parser)
+target_include_directories(${CMAKE_PROJECT_NAME}_testing PUBLIC ../lib/sql-parser/src)

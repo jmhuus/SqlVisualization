@@ -12,6 +12,7 @@ using hsql::SQLStatement;
 using hsql::SelectStatement;
 using hsql::StatementType;
 using hsql::TableRef;
+using hsql::TableRefType;
 using hsql::InsertStatement;
 
 const std::map<enum StatementType, std::string>
@@ -34,7 +35,18 @@ Node::type_name_mapping = {
 
 Node::Node(const SQLStatement* statement, NodeManager* node_manager,
 	   const std::string& name) {
+  // Node represents a SQL statement, not a table
   stmt = statement;
+  table_type = -1;
+  _name = name;
+  _node_manager = node_manager;
+}
+
+Node::Node(TableRefType table_ref_type, NodeManager* node_manager,
+	   const std::string& name) {
+  // Node represents a table, not a SQL statement
+  table_type = table_ref_type;
+  stmt = nullptr;
   _name = name;
   _node_manager = node_manager;
 }
@@ -43,7 +55,10 @@ Node::Node(const SQLStatement* statement, NodeManager* node_manager) {
   // Set up current node
   _node_manager = node_manager;
   stmt = statement;
+  table_type = -1;
+  // Unique to this constructor. Name needs to be generated.
   node_manager->set_node_name(this);
+  
   
   // Search for parent and child nodes
   init_parent_nodes(stmt);
@@ -86,7 +101,7 @@ void Node::search_select_from_table(const SelectStatement* stmt) {
   case hsql::kTableName: {
     Node* new_parent_node;
     if (!_node_manager->node_exists(from_table->getName())) {
-       new_parent_node = new Node(stmt, _node_manager, from_table->getName());
+       new_parent_node = new Node(from_table->type, _node_manager, from_table->getName());
        _node_manager->add_node(new_parent_node);
     } else {
       try {
@@ -114,7 +129,7 @@ void Node::search_select_from_table(const SelectStatement* stmt) {
     // Add left table
     Node* new_parent_node = nullptr;
     if (!_node_manager->node_exists(left_table->getName())) {
-      new_parent_node = new Node(stmt, _node_manager, left_table->getName());
+      new_parent_node = new Node(left_table->type, _node_manager, left_table->getName());
       _node_manager->add_node(new_parent_node);
     } else {
       try {
@@ -127,7 +142,7 @@ void Node::search_select_from_table(const SelectStatement* stmt) {
     add_parent_node(new_parent_node);
 
     // Add right table
-    // Joined data source is a select query
+    // Recurse: joined data source is a select query
     if (right_table->type == hsql::kTableSelect) {
       search_select_from_table(right_table->select);
     }
@@ -136,7 +151,7 @@ void Node::search_select_from_table(const SelectStatement* stmt) {
     if (right_table->type == hsql::kTableName) {
       Node* new_parent_node = nullptr;
       if (!_node_manager->node_exists(right_table->getName())) {
-	new_parent_node = new Node(stmt, _node_manager, right_table->getName());
+	new_parent_node = new Node(right_table->type, _node_manager, right_table->getName());
 	_node_manager->add_node(new_parent_node);
       } else {
 	try {
@@ -155,7 +170,7 @@ void Node::search_select_from_table(const SelectStatement* stmt) {
     for (auto it = from_tables.begin(); it != from_tables.end(); ++it) {
       Node* new_parent_node = nullptr;
       if (!_node_manager->node_exists((*it)->getName())) {
-	new_parent_node = new Node(stmt, _node_manager, (*it)->getName());
+	new_parent_node = new Node((*it)->type, _node_manager, (*it)->getName());
 	_node_manager->add_node(new_parent_node);
       } else {
 	try {

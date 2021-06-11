@@ -1,2 +1,2 @@
 #!/bin/bash
-./build/SqlVisualization
+./build/src/SqlVisualization
