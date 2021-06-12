@@ -5,10 +5,10 @@
 #include <map>
 #include <string>
 #include <iostream>
-#include "sql/SQLStatement.h"
-#include "sql/SelectStatement.h"
-#include "sql/InsertStatement.h"
-#include "sql/Table.h"
+#include "src/sql/SQLStatement.h"
+#include "src/sql/SelectStatement.h"
+#include "src/sql/InsertStatement.h"
+#include "src/sql/Table.h"
 #include "node_manager.fwd.h"
 
 using hsql::SQLStatement;

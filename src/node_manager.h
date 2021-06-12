@@ -5,8 +5,8 @@
 #include <string>
 #include <exception>
 #include "node.fwd.h"
-#include "sql/SQLStatement.h"
-#include "sql/SelectStatement.h"
+#include "src/sql/SQLStatement.h"
+#include "src/sql/SelectStatement.h"
 
 /**
  * NodeManager class contains references to all Nodes, defined in 
@@ -28,6 +28,7 @@ class NodeManager {
   std::vector<Node*> get_nodes();
   void print_all_nodes_info();
   std::string get_all_nodes_info();
+  std::string get_graphviz_digraph();
 };
 
 /**
