@@ -17,29 +17,36 @@
 // Set up flags
 // DEFINE_string(input, "", "Fully qualified path to .sql file.");
 // DEFINE_string(output_file, "./", "Relative path to .sql e.fil");
-ABSL_FLAG(std::string, input_file, "hello", "Fully qualified path to .sql file.");
+ABSL_FLAG(std::string, input_file, "", "Fully qualified path to .sql file.");
+ABSL_FLAG(std::string, query, "", "Directly provided raw SQL query text. (Required if not input_file)");
+ABSL_FLAG(std::string, out, "", "Optional digraph output file. If "
+	  "not specified, digraph to standard out.");
 
 
 int main(int argc, char *argv[]) {
   // gflags::ParseCommandLineFlags(&argc, &argv, true);
   // gflags::MarkFlagAsRequired("input");
   absl::ParseCommandLine(argc, argv);
-  
-  // Read input file
-  std::ifstream file_input(absl::GetFlag(FLAGS_input_file));
-  if (!file_input.good()) {
-    std::cout << "can't find file: " << (file_input.fail() ? "true" : "false") << "\n";
-    return 1;
-  }
-  std::string sql_file = "";
-  std::string line;
-  while (std::getline(file_input, line)) {
-      sql_file += line;
+
+  std::string query = "";
+  if (absl::GetFlag(FLAGS_input_file) != "") {
+    // Read input file
+    std::ifstream file_input(absl::GetFlag(FLAGS_input_file));
+    if (!file_input.good()) {
+      std::cout << "can't find file: " << (file_input.fail() ? "true" : "false") << "\n";
+      return 1;
+    }
+    std::string line;
+    while (std::getline(file_input, line)) {
+      query += line;
+    }
+  } else if (absl::GetFlag(FLAGS_query) != "") {
+    query = absl::GetFlag(FLAGS_query);
   }
 
   // Parse SQL
   hsql::SQLParserResult result;
-  hsql::SQLParser::parse(sql_file, &result);
+  hsql::SQLParser::parse(query, &result);
   if (!result.isValid()) {
     std::cout << "Error when parsing the SQL string: " << result.errorMsg() << "\n";
   }
@@ -51,9 +58,14 @@ int main(int argc, char *argv[]) {
     node_manager->add_node(new Node(stmt, node_manager));
   }
 
-  // Print nodes from NodeManager
-  // std::cout << node_manager->get_all_nodes_info();
-  std::cout << node_manager->get_graphviz_digraph();
+  // Print or write digraph
+  if (absl::GetFlag(FLAGS_out) != "") {
+    std::ofstream file_output(absl::GetFlag(FLAGS_out), std::ofstream::out);
+    file_output << node_manager->get_graphviz_digraph();
+  } else {
+    std::cout << node_manager->get_graphviz_digraph();
+  }
+  
 
   delete node_manager;
   return 0;
