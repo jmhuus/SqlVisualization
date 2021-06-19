@@ -20,7 +20,7 @@
 ABSL_FLAG(std::string, input_file, "", "Fully qualified path to .sql file.");
 ABSL_FLAG(std::string, query, "", "Directly provided raw SQL query text. (Required if not input_file)");
 ABSL_FLAG(std::string, out, "", "Optional digraph output file. If "
-	  "not specified, digraph to standard out.");
+	  "not specified, digraph to standard out. (optional)");
 
 
 int main(int argc, char *argv[]) {
