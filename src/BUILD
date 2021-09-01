@@ -1,8 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 
-
-# Was able to fix the circular reference error by
-# putting both node and node_manager into one cc_library.
 cc_library(
     name = "node",
     srcs = [
@@ -35,16 +32,5 @@ cc_binary(
         "@sql_parser//:sql-parser",
         "@com_google_absl//absl/flags:flag",
         "@com_google_absl//absl/flags:parse"
-    ],
-)
-
-
-cc_binary(
-    name = "sample",
-    srcs = ["sample.cc"],
-    data = ["//test:test_sql_many_statements.sql"],
-    deps = [
-        ":node",
-        "@sql_parser//:sql-parser",
     ],
 )

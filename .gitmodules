@@ -1,3 +1,6 @@
 [submodule "third_party/sql-parser"]
 	path = third_party/sql-parser
 	url = https://github.com/hyrise/sql-parser.git
+[submodule "SqlVisualization"]
+	path = SqlVisualization
+	url = https://github.com/jmhuus/SqlVisualization.git

@@ -4,8 +4,8 @@
 #include "src/sql/SelectStatement.h"
 #include "src/sql/Table.h"
 #include "src/util/sqlhelper.h"
-#include "node_manager.h"
-#include "node.h"
+#include "src/node_manager.h"
+#include "src/node.h"
 #include <iostream>
 #include <vector>
 #include <stdexcept>
